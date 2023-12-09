@@ -112,7 +112,7 @@ class RootPage extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'This is the end of the content',
+                  'What do you want to do?',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
@@ -125,22 +125,39 @@ class RootPage extends StatelessWidget {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                  crossAxisCount: 4,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
                 ),
-                itemCount: 10,
+                itemCount: 8,
                 itemBuilder: (BuildContext context, int index) {
-                  // return GestureDetector(
-                  //   onTap: () {
-                  //     print('Tapped on item $index');
-
-                  //   },
-                  //   child: Image.asset(
-                  //     'assets/image_$index.png', // Replace with your image paths
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // );
+                  return GestureDetector(
+                    onTap: () {
+                      // Handle the tap action here
+                      print('Tapped on item');
+                      // Navigate to another screen, perform an action, etc.
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 150, // Adjust the width as needed
+                          height: 100, // Adjust the height as needed
+                          child: Image.asset(
+                            'assets/images/haircut.png',
+                            
+                          ),
+                        ),
+                        SizedBox(height: 1),
+                        Text(
+                          'Haircut', // Replace with your text
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
             ],
