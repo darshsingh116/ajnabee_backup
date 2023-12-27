@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "913155775803",
+    "project_id": "ajnabee-8f480",
+    "storage_bucket": "ajnabee-8f480.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913155775803:android:25635cdff9b865fb73ab1e",
+        "android_client_info": {
+          "package_name": "com.example.ajnabee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdumqN_E_IPdwXVZdvs27KeeUpZaE8Lts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
