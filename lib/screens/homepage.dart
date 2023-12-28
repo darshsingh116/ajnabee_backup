@@ -87,7 +87,7 @@ class RootPage extends StatelessWidget {
                         width: 320,
                         height: 118,
                         child: Image.asset(
-                          "assets/images/Card.png",
+                          "assets/cards/Card.png",
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -96,7 +96,7 @@ class RootPage extends StatelessWidget {
                         width: 320,
                         height: 118,
                         child: Image.asset(
-                          "assets/images/Card.png",
+                          "assets/cards/Card.png",
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -105,7 +105,7 @@ class RootPage extends StatelessWidget {
                         width: 320,
                         height: 118,
                         child: Image.asset(
-                          "assets/images/Card.png",
+                          "assets/cards/Card.png",
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -147,42 +147,42 @@ class RootPage extends StatelessWidget {
                       children: <Widget>[
                         CategoryButton(
                           title: "Haircut",
-                          asset: "assets/images/haircut.png",
+                          asset: "assets/categories/haircut.png",
                           onTap: () {},
                         ),
                         CategoryButton(
                           title: "Nails",
-                          asset: "assets/images/nails.png",
+                          asset: "assets/categories/nails.png",
                           onTap: () {},
                         ),
                         CategoryButton(
                           title: "Facial",
-                          asset: "assets/images/facial.png",
+                          asset: "assets/categories/facial.png",
                           onTap: () {},
                         ),
                         CategoryButton(
                           title: "Coloring",
-                          asset: "assets/images/coloring.png",
+                          asset: "assets/categories/coloring.png",
                           onTap: () {},
                         ),
                         CategoryButton(
                           title: "Spa",
-                          asset: "assets/images/spa.png",
+                          asset: "assets/categories/spa.png",
                           onTap: () {},
                         ),
                         CategoryButton(
                           title: "Waxing",
-                          asset: "assets/images/waxing.png",
+                          asset: "assets/categories/waxing.png",
                           onTap: () {},
                         ),
                         CategoryButton(
                           title: "Makeup",
-                          asset: "assets/images/makeup.png",
+                          asset: "assets/categories/makeup.png",
                           onTap: () {},
                         ),
                         CategoryButton(
                           title: "Massage",
-                          asset: "assets/images/massage.png",
+                          asset: "assets/categories/massage.png",
                           onTap: () {},
                         ),
                       ],
@@ -344,7 +344,7 @@ class RootPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Image.asset(
-                                      "assets/images/Star.png",
+                                      "assets/misc/Star.png",
                                       width: 16,
                                       height: 16,
                                     ),
@@ -423,7 +423,7 @@ class RootPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Image.asset(
-                                      "assets/images/Star.png",
+                                      "assets/misc/Star.png",
                                       width: 16,
                                       height: 16,
                                     ),
