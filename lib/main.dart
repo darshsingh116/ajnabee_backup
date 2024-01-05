@@ -3,6 +3,7 @@ import 'package:ajnabee/firebase_options.dart';
 import 'package:ajnabee/repositories/firebase_repo.dart';
 import 'package:ajnabee/repositories/firebase_storage_repo.dart';
 import 'package:ajnabee/screens/boarding_screen.dart';
+import 'package:ajnabee/screens/salon_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       //home: const RootPage(),
-      home: RootPage()
+      home: SalonDetails()
     )));
   }
 }
