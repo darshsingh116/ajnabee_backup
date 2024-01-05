@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       //home: const RootPage(),
-      home: BoardingScreen()
+      home: RootPage()
     )));
   }
 }
