@@ -1,4 +1,5 @@
 import 'package:ajnabee/bloc/auth/auth_bloc.dart';
+import 'package:ajnabee/bloc/home/bloc/home_bloc.dart';
 import 'package:ajnabee/firebase_options.dart';
 import 'package:ajnabee/repositories/firebase_repo.dart';
 import 'package:ajnabee/repositories/firebase_storage_repo.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(create: (BuildContext context) => AuthBloc()),
+          BlocProvider<HomeBloc>(create: (BuildContext context) => HomeBloc()),
         ],
         child: MaterialApp(
       title: 'Flutter Demo',
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       //home: const RootPage(),
-      home: SalonDetails()
+      home: BoardingScreen()
     )));
   }
 }

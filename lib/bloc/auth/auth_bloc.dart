@@ -42,7 +42,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final name = event.name;
       //print("hai2");
       int success = await event.authRepository.signUp(
-          email: email, password: password, mobileNumber: mobileNumber, name: name);
+          email: email,
+          password: password,
+          mobileNumber: mobileNumber,
+          name: name);
 
       if (success == 1) {
         emit(AuthStateLoggedIn());
@@ -68,6 +71,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthStateLoggedOut());
       } else {
         emit(AuthStateLoggedIn());
+        //event.authRepository.addSalon();    this is a test call function only to add a salon manually
       }
     });
 

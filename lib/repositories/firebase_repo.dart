@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:ajnabee/models/salon_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ajnabee/models/user_model.dart';
@@ -97,6 +97,58 @@ class FirebaseRepository {
 
   Future<void> logOut() async {
     await _firebaseAuth.signOut();
+  }
+
+  // maybe move to utils later
+  Future<int> addSalon() async {
+    try {
+      var mydata = [SalonModel("Relax Salon", "nice", 2)];
+      //data model entry
+      //var salon = SalonModel(name:"Relax Salon",description: "nice", mobileNumber:2);
+
+      print("adding salon");
+
+      //data model entry finished
+      int x = (await _firebaseFirestore.collection("SalonList").count().get())
+          .count;
+
+      print(x);
+
+      for (int i = 0; i < mydata.length; i++) {
+        //var mapdata = SalonModel.fromMap(mydata[i]);
+        var mapdata = mydata[i];
+        print(":)");
+
+        await _firebaseFirestore
+            .collection("SalonList")
+            .doc(x.toString())
+            .set(mapdata.toJson());
+        x++;
+      }
+
+      return 1;
+    } on FirebaseAuthException catch (e) {
+      return 0;
+    } catch (e) {
+      print("~~~~~~adding salon error" + e.toString());
+      return 0;
+    }
+  }
+
+  //get SalonList model
+  Future<List<SalonModel>> getSalons() async {
+    try {
+      var response = await _firebaseFirestore.collection("SalonList").get();
+      var list =
+          response.docs.map((doc) => SalonModel.fromMap(doc.data())).toList();
+      print(list[0].name);
+      return list;
+
+      //return 1;
+    } catch (e) {
+      return [];
+      //return 0;
+    }
   }
 }
 
