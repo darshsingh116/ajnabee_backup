@@ -71,11 +71,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthStateLoggedOut());
       } else {
         emit(AuthStateLoggedIn());
-        //event.authRepository.addSalon();    this is a test call function only to add a salon manually
+        //event.authRepository.addSalon();   // this is a test call function only to add a salon manually
       }
     });
 
-    on<LogOut>((event, emit) async {
+    on<LogOut>((event, emit) async { 
       emit(AuthStateIsLoading());
       await event.authRepository.logOut();
       emit(AuthStateLoggedOut());

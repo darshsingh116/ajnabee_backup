@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:ajnabee/models/salon_model.dart';
+import 'package:ajnabee/models/salon_services_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ajnabee/models/user_model.dart';
@@ -102,7 +103,19 @@ class FirebaseRepository {
   // maybe move to utils later
   Future<int> addSalon() async {
     try {
-      var mydata = [SalonModel("Relax Salon", "nice", 2)];
+      var mydata = [
+        SalonModel(
+            "Relax Salon",
+            "nice",
+            2,
+            "dwarka,india",
+            4,
+            [
+              SalonServicesModel(
+                  serviceName: "Curly Hair", price: 99, type: "haircut")
+            ],
+            0)
+      ];
       //data model entry
       //var salon = SalonModel(name:"Relax Salon",description: "nice", mobileNumber:2);
 

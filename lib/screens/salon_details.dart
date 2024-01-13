@@ -1,7 +1,10 @@
+import 'package:ajnabee/models/salon_model.dart';
 import 'package:flutter/material.dart';
 
 class SalonDetails extends StatelessWidget {
-  const SalonDetails({Key? key}) : super(key: key);
+  final SalonModel salonModel;
+
+  const SalonDetails({Key? key, required this.salonModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +70,7 @@ class SalonDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Shahnaz Husain',
+                      salonModel.name,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
@@ -76,7 +79,7 @@ class SalonDetails extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Connaught Place, New Delhi',
+                      salonModel.address,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -98,9 +101,10 @@ class SalonDetails extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Nunito Sans',
                           ),
-                          
                         ),
-                        const SizedBox(width:30,),
+                        const SizedBox(
+                          width: 30,
+                        ),
                         Icon(
                           Icons.local_offer,
                           color: const Color.fromRGBO(255, 0, 25, 1),
@@ -114,8 +118,6 @@ class SalonDetails extends StatelessWidget {
                             fontFamily: 'Nunito Sans',
                             color: const Color.fromRGBO(255, 0, 25, 1),
                           ),
-                          
-                          
                         ),
                         Text(
                           '(6 pax available)',
@@ -123,7 +125,6 @@ class SalonDetails extends StatelessWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Nunito Sans',
-                            
                           ),
                         ),
                       ],
@@ -136,15 +137,16 @@ class SalonDetails extends StatelessWidget {
                         ),
                         SizedBox(width: 8),
                         Text(
-                          '4.7',
+                          salonModel.rating.toString(),
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Nunito Sans',
                           ),
-                          
                         ),
-                        const SizedBox(width: 2,),
+                        const SizedBox(
+                          width: 2,
+                        ),
                         Text(
                           '(2.7k)',
                           style: TextStyle(
@@ -152,79 +154,77 @@ class SalonDetails extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Nunito Sans',
                           ),
-                          
                         ),
-                        const SizedBox(width:55,),
+                        const SizedBox(
+                          width: 55,
+                        ),
                         Icon(
                           Icons.visibility,
                           color: const Color.fromRGBO(93, 100, 110, 1),
                         ),
                         SizedBox(width: 5),
-                        
                         Text(
                           '10k views',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Nunito Sans',
-                            
                           ),
                         ),
                       ],
                     ),
                     Divider(
-                      
-                      thickness: 10, 
-                      color: Colors.grey, 
+                      thickness: 10,
+                      color: Colors.grey,
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       'About',
                       style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: 'Manrope',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Manrope',
                       ),
                     ),
                     const SizedBox(height: 10),
-                     
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       children: [
                         Text(
-                          "Keeping up to speed with the market's latest trends \n Plush Beauty Lounge recognizes the need for constant \nimprovements. Our team receives regular training from \n hairdressers all...",
+                          salonModel.description,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Nunito Sans',
-                            
                           ),
-                          
                         ),
-                        
                         Text(
                           'Read more',
                           style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Nunito Sans'
-
-                            
-                          ),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Nunito Sans'),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       'Opening Hours',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         fontFamily: 'Manrope',
-                            
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     Row(
                       children: [
                         Container(
@@ -235,7 +235,9 @@ class SalonDetails extends StatelessWidget {
                             color: Color.fromRGBO(255, 214, 0, 1),
                           ),
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,7 +248,6 @@ class SalonDetails extends StatelessWidget {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Nunito Sans',
-                            
                               ),
                             ),
                             Text(
@@ -255,13 +256,13 @@ class SalonDetails extends StatelessWidget {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Manrope',
-                            
                               ),
                             ),
                           ],
-
                         ),
-                        const SizedBox(width: 30,),
+                        const SizedBox(
+                          width: 30,
+                        ),
                         Container(
                           width: 8,
                           height: 8,
@@ -270,7 +271,9 @@ class SalonDetails extends StatelessWidget {
                             color: Color.fromRGBO(255, 214, 0, 1),
                           ),
                         ),
-                        const SizedBox(width: 10,),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,7 +284,6 @@ class SalonDetails extends StatelessWidget {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Nunito Sans',
-                            
                               ),
                             ),
                             Text(
@@ -290,27 +292,29 @@ class SalonDetails extends StatelessWidget {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Manrope',
-                            
                               ),
                             ),
-                            const SizedBox(height: 20,),
-
+                            const SizedBox(
+                              height: 20,
+                            ),
                           ],
                         )
                       ],
                     ),
-                    const SizedBox(height: 20,),
-                    
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       'Our Services',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         fontFamily: 'Manrope',
-                            
                       ),
                     ),
-                    const SizedBox(height: 14,),
+                    const SizedBox(
+                      height: 14,
+                    ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Padding(
@@ -319,16 +323,16 @@ class SalonDetails extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                             _buildInterestContainer(
+                            _buildInterestContainer(
                               imagePath: "assets/categories/haircut.png",
                               text: "Haircut",
                             ),
-                            const SizedBox(width:5),
+                            const SizedBox(width: 5),
                             _buildInterestContainer(
                               imagePath: "assets/categories/nails.png",
                               text: "Nails",
                             ),
-                            const SizedBox(width : 5),
+                            const SizedBox(width: 5),
                             _buildInterestContainer(
                               imagePath: "assets/categories/facial.png",
                               text: "Facial",
@@ -345,7 +349,7 @@ class SalonDetails extends StatelessWidget {
                           width: 114,
                         )
                       ],
-                    )  
+                    )
                   ],
                 ),
               ),
@@ -355,7 +359,9 @@ class SalonDetails extends StatelessWidget {
       ),
     );
   }
-  Widget _buildInterestContainer({required String imagePath, required String text}) {
+
+  Widget _buildInterestContainer(
+      {required String imagePath, required String text}) {
     return Container(
       margin: const EdgeInsets.all(8),
       width: 146,

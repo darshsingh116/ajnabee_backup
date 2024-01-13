@@ -1,5 +1,7 @@
 import 'package:ajnabee/bloc/home/bloc/home_bloc.dart';
+import 'package:ajnabee/models/salon_model.dart';
 import 'package:ajnabee/repositories/firebase_repo.dart';
+import 'package:ajnabee/screens/salon_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,8 +23,10 @@ class RootPage extends StatelessWidget {
             // TODO: implement listener
           },
           builder: (context, state) {
-            if(state is HomeInitial){context.read<HomeBloc>().add(
-                HomeEventInitialize(firebaseRepository: firebaseRepository));}
+            if (state is HomeInitial) {
+              context.read<HomeBloc>().add(
+                  HomeEventInitialize(firebaseRepository: firebaseRepository));
+            }
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,60 +210,62 @@ class RootPage extends StatelessWidget {
 
                   const SizedBox(height: 16),
 
-                  //SALON YOU FOLLOW
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                          ),
-                          child: Text(
-                            'Salon you follow',
-                            style: TextStyle(
-                              color: Color(0xFF111111),
-                              fontSize: 16,
-                              fontFamily: 'Manrope',
-                              fontWeight: FontWeight.w700,
-                              height: 0,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: Row(
-                              children: List.generate(
-                                5,
-                                (index) {
-                                  return Row(
-                                    children: <Widget>[
-                                      Image.asset(
-                                        "assets/stories/Story ${index + 1}.png",
-                                        fit: BoxFit.fill,
-                                      ),
-                                      const SizedBox(width: 8),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // //SALON YOU FOLLOW
+                  // SizedBox(
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //       vertical: 8,
+                  //     ),
+                  //     child: Column(
+                  //       mainAxisAlignment: MainAxisAlignment.start,
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: <Widget>[
+                  //         const Padding(
+                  //           padding: EdgeInsets.symmetric(
+                  //             horizontal: 16,
+                  //           ),
+                  //           child: Text(
+                  //             'Salon you follow',
+                  //             style: TextStyle(
+                  //               color: Color(0xFF111111),
+                  //               fontSize: 16,
+                  //               fontFamily: 'Manrope',
+                  //               fontWeight: FontWeight.w700,
+                  //               height: 0,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         const SizedBox(height: 24),
+                  //         SingleChildScrollView(
+                  //           scrollDirection: Axis.horizontal,
+                  //           child: Padding(
+                  //             padding: const EdgeInsets.symmetric(
+                  //               horizontal: 16,
+                  //             ),
+                  //             child: Row(
+                  //               children: List.generate(
+                  //                 5,
+                  //                 (index) {
+                  //                   return Row(
+                  //                     children: <Widget>[
+                  //                       Image.asset(
+                  //                         "assets/stories/Story ${index + 1}.png",
+                  //                         fit: BoxFit.fill,
+                  //                       ),
+                  //                       const SizedBox(width: 8),
+                  //                     ],
+                  //                   );
+                  //                 },
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
 
-                  const SizedBox(height: 16),
+                  // const SizedBox(height: 16),
 
                   //FEATURED SALON
                   Padding(
@@ -302,181 +308,32 @@ class RootPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
+                        SizedBox(
+                          height: 320,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 16,
                             ),
                             child: BlocBuilder<HomeBloc, HomeState>(
                               builder: (context, state) {
-                                if (state is HomeStateInitialized) {                            
-                                  return Row(
-                                    children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Image.asset(
-                                            "assets/salons/Image1.png",
-                                          ),
-                                          const SizedBox(height: 16),
-                                          const Text(
-                                            'Hair . Nails . Facial',
-                                            style: TextStyle(
-                                              color: Color(0xFFFFD600),
-                                              fontSize: 12,
-                                              fontFamily: 'Nunito Sans',
-                                              fontWeight: FontWeight.w400,
-                                              height: 0,
-                                              letterSpacing: 0.36,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          const Text(
-                                            'Lakmé',
-                                            style: TextStyle(
-                                              color: Color(0xFF111111),
-                                              fontSize: 16,
-                                              fontFamily: 'Manrope',
-                                              fontWeight: FontWeight.w700,
-                                              height: 0,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 6),
-                                          const Text(
-                                            'G 90, Ground Floor, V3S ...',
-                                            style: TextStyle(
-                                              color: Color(0xFF50555C),
-                                              fontSize: 14,
-                                              fontFamily: 'Nunito Sans',
-                                              fontWeight: FontWeight.w400,
-                                              height: 0,
-                                              letterSpacing: 0.24,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 25),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Image.asset(
-                                                "assets/misc/Star.png",
-                                                width: 16,
-                                                height: 16,
-                                              ),
-                                              const SizedBox(width: 8),
-                                              const Text(
-                                                '4.8',
-                                                style: TextStyle(
-                                                  color: Color(0xFF111111),
-                                                  fontSize: 12,
-                                                  fontFamily: 'Manrope',
-                                                  fontWeight: FontWeight.w700,
-                                                  height: 0,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4),
-                                              const Text(
-                                                '(3.1k)',
-                                                style: TextStyle(
-                                                  color: Color(0xFF111111),
-                                                  fontSize: 12,
-                                                  fontFamily: 'Nunito Sans',
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 0,
-                                                  letterSpacing: 0.36,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Image.asset(
-                                            "assets/salons/Image2.png",
-                                          ),
-                                          const SizedBox(height: 16),
-                                          const Text(
-                                            'Hair . Facial . 2+',
-                                            style: TextStyle(
-                                              color: Color(0xFFFFD600),
-                                              fontSize: 12,
-                                              fontFamily: 'Nunito Sans',
-                                              fontWeight: FontWeight.w400,
-                                              height: 0,
-                                              letterSpacing: 0.36,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          const Text(
-                                            'TRUEFITT & HILL',
-                                            style: TextStyle(
-                                              color: Color(0xFF111111),
-                                              fontSize: 16,
-                                              fontFamily: 'Manrope',
-                                              fontWeight: FontWeight.w700,
-                                              height: 0,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 6),
-                                          const Text(
-                                            'Ground Floor, Shop No.10, ...',
-                                            style: TextStyle(
-                                              color: Color(0xFF50555C),
-                                              fontSize: 14,
-                                              fontFamily: 'Nunito Sans',
-                                              fontWeight: FontWeight.w400,
-                                              height: 0,
-                                              letterSpacing: 0.24,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 25),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Image.asset(
-                                                "assets/misc/Star.png",
-                                                width: 16,
-                                                height: 16,
-                                              ),
-                                              const SizedBox(width: 8),
-                                              const Text(
-                                                '4.7',
-                                                style: TextStyle(
-                                                  color: Color(0xFF111111),
-                                                  fontSize: 12,
-                                                  fontFamily: 'Manrope',
-                                                  fontWeight: FontWeight.w700,
-                                                  height: 0,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4),
-                                              const Text(
-                                                '(2.7k)',
-                                                style: TextStyle(
-                                                  color: Color(0xFF111111),
-                                                  fontSize: 12,
-                                                  fontFamily: 'Nunito Sans',
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 0,
-                                                  letterSpacing: 0.36,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                if (state is HomeStateInitialized) {
+                                  return ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 1,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                            right:
+                                                16.0), // Adjust spacing between cards
+                                        child: GestureDetector(child: FeaturedSalonCard(context,state.salonModelList[index]),
+                                        onTap: () {
+                                          Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SalonDetails(salonModel: state.salonModelList[index],)),
+        );
+                                        },),
+                                      );
+                                    },
                                   );
                                 }
 
@@ -945,6 +802,85 @@ class RootPage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget FeaturedSalonCard(BuildContext context, SalonModel salon) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Image.asset("assets/salons/Image1.png"),
+        const SizedBox(height: 16),
+        Text(
+          "salon.services",
+          style: TextStyle(
+            color: Color(0xFFFFD600),
+            fontSize: 12,
+            fontFamily: 'Nunito Sans',
+            fontWeight: FontWeight.w400,
+            height: 0,
+            letterSpacing: 0.36,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          salon.name,
+          style: TextStyle(
+            color: Color(0xFF111111),
+            fontSize: 16,
+            fontFamily: 'Manrope',
+            fontWeight: FontWeight.w700,
+            height: 0,
+          ),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          salon.address,
+          style: TextStyle(
+            color: Color(0xFF50555C),
+            fontSize: 14,
+            fontFamily: 'Nunito Sans',
+            fontWeight: FontWeight.w400,
+            height: 0,
+            letterSpacing: 0.24,
+          ),
+        ),
+        const SizedBox(height: 25),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(
+              "assets/misc/Star.png",
+              width: 16,
+              height: 16,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              salon.rating.toString(),
+              style: TextStyle(
+                color: Color(0xFF111111),
+                fontSize: 12,
+                fontFamily: 'Manrope',
+                fontWeight: FontWeight.w700,
+                height: 0,
+              ),
+            ),
+            const SizedBox(width: 4),
+            Text(
+              '(4k)',
+              style: TextStyle(
+                color: Color(0xFF111111),
+                fontSize: 12,
+                fontFamily: 'Nunito Sans',
+                fontWeight: FontWeight.w400,
+                height: 0,
+                letterSpacing: 0.36,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
