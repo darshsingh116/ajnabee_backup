@@ -1,10 +1,20 @@
 import 'package:ajnabee/models/salon_model.dart';
+import 'package:ajnabee/models/salon_model.dart';
 import 'package:flutter/material.dart';
 
-class SalonDetails extends StatelessWidget {
+import '../models/salon_model.dart';
+
+class SalonDetails extends StatefulWidget {
   final SalonModel salonModel;
 
   const SalonDetails({Key? key, required this.salonModel}) : super(key: key);
+
+  @override
+  State<SalonDetails> createState() => _SalonDetailsState();
+}
+
+class _SalonDetailsState extends State<SalonDetails> {
+  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +80,7 @@ class SalonDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      salonModel.name,
+                      widget.salonModel.name,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
@@ -79,7 +89,7 @@ class SalonDetails extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      salonModel.address,
+                      widget.salonModel.address,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -119,14 +129,7 @@ class SalonDetails extends StatelessWidget {
                             color: const Color.fromRGBO(255, 0, 25, 1),
                           ),
                         ),
-                        Text(
-                          '(6 pax available)',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Nunito Sans',
-                          ),
-                        ),
+
                       ],
                     ),
                     Row(
@@ -137,7 +140,7 @@ class SalonDetails extends StatelessWidget {
                         ),
                         SizedBox(width: 8),
                         Text(
-                          salonModel.rating.toString(),
+                          widget.salonModel.rating.toString(),
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
@@ -190,26 +193,33 @@ class SalonDetails extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const SizedBox(
-                      height: 20,
+                      height: 5,
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          salonModel.description,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Nunito Sans',
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.90,
+                            child: Text(
+                              isExpanded
+                                  ? widget.salonModel.description
+                                  : widget.salonModel.description.substring(0, 30) +
+                                  '... Read more',
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Nunito Sans',
+                              ),
+                            ),
                           ),
-                        ),
-                        Text(
-                          'Read more',
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Nunito Sans'),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
