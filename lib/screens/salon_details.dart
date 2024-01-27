@@ -1,13 +1,10 @@
 import 'package:ajnabee/models/salon_model.dart';
-import 'package:ajnabee/models/salon_model.dart';
 import 'package:flutter/material.dart';
-
-import '../models/salon_model.dart';
 
 class SalonDetails extends StatefulWidget {
   final SalonModel salonModel;
 
-  const SalonDetails({Key? key, required this.salonModel}) : super(key: key);
+  const SalonDetails({super.key, required this.salonModel});
 
   @override
   State<SalonDetails> createState() => _SalonDetailsState();
@@ -19,352 +16,1087 @@ class _SalonDetailsState extends State<SalonDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 0,
-      ),
+      // appBar: AppBar(
+      //   toolbarHeight: 0,
+      // ),
       body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints.expand(
-            height: MediaQuery.of(context).size.height, // Full screen height
-            width: MediaQuery.of(context).size.width, // Full screen width
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                // Add a top position to position the image
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Image.asset('assets/shop_details/shop.png'),
-              ),
-              Positioned(
-                left: 20,
-                top: 25,
-                child: Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: const Color.fromRGBO(255, 214, 0, 1),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Image(
+                  image: const AssetImage('assets/shop_details/shop.png'),
+                  fit: BoxFit.fitWidth,
+                  width: MediaQuery.sizeOf(context).width,
+                ),
+                Positioned(
+                  left: 16,
+                  top: MediaQuery.paddingOf(context).top + 24,
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: ShapeDecoration(
+                      color: const Color(0x99F8FAFA),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    child: GestureDetector(
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Color.fromRGBO(255, 214, 0, 1),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                left: 280,
-                top: 25,
-                child: Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.favorite_border,
-                      color: const Color.fromRGBO(255, 0, 25, 1),
+                Positioned(
+                  right: 80,
+                  top: MediaQuery.paddingOf(context).top + 24,
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: ShapeDecoration(
+                      color: const Color(0x99F8FAFA),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    child: GestureDetector(
+                      child: const Icon(
+                        Icons.favorite_border_outlined,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
+                Positioned(
+                  right: 16,
+                  top: MediaQuery.paddingOf(context).top + 24,
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: ShapeDecoration(
+                      color: const Color(0x99F8FAFA),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    child: GestureDetector(
+                      child: const Icon(
+                        Icons.map,
+                        color: Color.fromRGBO(255, 214, 0, 1),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 16,
+                top: 24,
               ),
-              Positioned(
-                top: 200,
-                left: 14,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.salonModel.name,
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Manrope',
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.salonModel.name,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Manrope',
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      widget.salonModel.address,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Nunito Sans',
-                      ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    widget.salonModel.address,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Nunito Sans',
                     ),
-                    SizedBox(height: 20),
-                    Row(
+                  ),
+                  const SizedBox(height: 20),
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.access_time,
+                        color: Color.fromRGBO(255, 214, 0, 1),
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        '[Open Today]',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Nunito Sans',
+                        ),
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      Icon(
+                        Icons.local_offer,
+                        color: Color.fromRGBO(255, 0, 25, 1),
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        '-58%',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Nunito Sans',
+                          color: Color.fromRGBO(255, 0, 25, 1),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Color.fromRGBO(249, 134, 0, 1),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        widget.salonModel.rating.toString(),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Nunito Sans',
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      const Text(
+                        '(2.7k)',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Nunito Sans',
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 55,
+                      ),
+                      const Icon(
+                        Icons.visibility,
+                        color: Color.fromRGBO(93, 100, 110, 1),
+                      ),
+                      const SizedBox(width: 5),
+                      const Text(
+                        '10k views',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Nunito Sans',
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'About',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Manrope',
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isExpanded = !isExpanded;
+                      });
+                    },
+                    child: Row(
                       children: [
-                        Icon(
-                          Icons.access_time,
-                          color: const Color.fromRGBO(255, 214, 0, 1),
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          '[Open Today]',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Nunito Sans',
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.90,
+                          child: Text(
+                            isExpanded
+                                ? widget.salonModel.description
+                                : '${widget.salonModel.description.substring(0, 30)}... Read more',
+                            softWrap: true,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Nunito Sans',
+                            ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        Icon(
-                          Icons.local_offer,
-                          color: const Color.fromRGBO(255, 0, 25, 1),
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          '-58%',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Nunito Sans',
-                            color: const Color.fromRGBO(255, 0, 25, 1),
-                          ),
-                        ),
-
                       ],
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: const Color.fromRGBO(249, 134, 0, 1),
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          widget.salonModel.rating.toString(),
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Nunito Sans',
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 2,
-                        ),
-                        Text(
-                          '(2.7k)',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Nunito Sans',
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 55,
-                        ),
-                        Icon(
-                          Icons.visibility,
-                          color: const Color.fromRGBO(93, 100, 110, 1),
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          '10k views',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Nunito Sans',
-                          ),
-                        ),
-                      ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Opening Hours',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Manrope',
                     ),
-                    Divider(
-                      thickness: 10,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'About',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Manrope',
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromRGBO(255, 214, 0, 1),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isExpanded = !isExpanded;
-                        });
-                      },
-                      child: Row(
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      const Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.90,
-                            child: Text(
-                              isExpanded
-                                  ? widget.salonModel.description
-                                  : widget.salonModel.description.substring(0, 30) +
-                                  '... Read more',
-                              softWrap: true,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Nunito Sans',
-                              ),
+                          Text(
+                            'Monday - Friday',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Nunito Sans',
+                            ),
+                          ),
+                          Text(
+                            '08:00am - 03:00pm',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Manrope',
                             ),
                           ),
                         ],
                       ),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromRGBO(255, 214, 0, 1),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      const Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Saturday - Sunday',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Nunito Sans',
+                            ),
+                          ),
+                          Text(
+                            '09:00am - 02:00pm',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Manrope',
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Our Services',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Manrope',
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Opening Hours',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Manrope',
+                  ),
+                  const SizedBox(
+                    height: 14,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5,
+                      ),
+                      child: Row(
+                        children: [
+                          _buildInterestContainer(
+                            imagePath: "assets/categories/haircut.png",
+                            text: "Haircut",
+                          ),
+                          const SizedBox(width: 5),
+                          _buildInterestContainer(
+                            imagePath: "assets/categories/nails.png",
+                            text: "Nails",
+                          ),
+                          const SizedBox(width: 5),
+                          _buildInterestContainer(
+                            imagePath: "assets/categories/facial.png",
+                            text: "Facial",
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromRGBO(255, 214, 0, 1),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Monday - Friday',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Nunito Sans',
-                              ),
-                            ),
-                            Text(
-                              '08:00am - 03:00pm',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Manrope',
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        Container(
-                          width: 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromRGBO(255, 214, 0, 1),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Saturday - Sunday',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Nunito Sans',
-                              ),
-                            ),
-                            Text(
-                              '09:00am - 02:00pm',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Manrope',
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
+                  ),
+                  const SizedBox(
+                    height: 14,
+                  ),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width - 32,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      shadows: const [
+                        BoxShadow(
+                          color: Color(0x3FCDCDCD),
+                          blurRadius: 8,
+                          offset: Offset(0, 4),
+                          spreadRadius: 0,
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
+                    child: Row(
+                      children: [
+                        const Image(
+                          image: AssetImage(
+                              "assets/shop_details/services/woman_mediium.png"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Row(
+                                children: [
+                                  Text(
+                                    'Woman Medium..',
+                                    style: TextStyle(
+                                      color: Color(0xFF111111),
+                                      fontSize: 14,
+                                      fontFamily: 'Manrope',
+                                      fontWeight: FontWeight.w700,
+                                      height: 0,
+                                    ),
+                                  ),
+                                  SizedBox(width: 12),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 8,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.sell,
+                                          color: Color(0xFFF88600),
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          '-20%',
+                                          style: TextStyle(
+                                            color: Color(0xFFF88600),
+                                            fontSize: 12,
+                                            fontFamily: 'Manrope',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'Rs 200',
+                                style: TextStyle(
+                                  color: Color(0xFFFFD600),
+                                  fontSize: 14,
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.w700,
+                                  height: 0,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.sizeOf(context).width - 210,
+                                    child: const Text(
+                                      "A blunt cut bob is a shorter hairstyle that's c..",
+                                      style: TextStyle(
+                                        color: Color(0xFF50555C),
+                                        fontSize: 12,
+                                        fontFamily: 'Nunito Sans',
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                        letterSpacing: 0.36,
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: ShapeDecoration(
+                                      color: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        side: const BorderSide(
+                                            width: 1, color: Color(0xFFED4C5C)),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.remove,
+                                      color: Color(0xFFED4C5C),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Our Services',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Manrope',
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width - 32,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      shadows: const [
+                        BoxShadow(
+                          color: Color(0x3FCDCDCD),
+                          blurRadius: 8,
+                          offset: Offset(0, 4),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        const Image(
+                          image: AssetImage(
+                              "assets/shop_details/services/bob_cut.png"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Row(
+                                children: [
+                                  Text(
+                                    'Bob/ Lob Cut',
+                                    style: TextStyle(
+                                      color: Color(0xFF111111),
+                                      fontSize: 14,
+                                      fontFamily: 'Manrope',
+                                      fontWeight: FontWeight.w700,
+                                      height: 0,
+                                    ),
+                                  ),
+                                  SizedBox(width: 12),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 8,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.sell,
+                                          color: Color(0xFFF88600),
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          '-20%',
+                                          style: TextStyle(
+                                            color: Color(0xFFF88600),
+                                            fontSize: 12,
+                                            fontFamily: 'Manrope',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'Rs 250',
+                                style: TextStyle(
+                                  color: Color(0xFFFFD600),
+                                  fontSize: 14,
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.w700,
+                                  height: 0,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.sizeOf(context).width - 210,
+                                    child: const Text(
+                                      "A blunt cut bob is a shorter hairstyle that's c..",
+                                      style: TextStyle(
+                                        color: Color(0xFF50555C),
+                                        fontSize: 12,
+                                        fontFamily: 'Nunito Sans',
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                        letterSpacing: 0.36,
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: ShapeDecoration(
+                                      color: const Color(0xFFFFD600),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width - 32,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      shadows: const [
+                        BoxShadow(
+                          color: Color(0x3FCDCDCD),
+                          blurRadius: 8,
+                          offset: Offset(0, 4),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        const Image(
+                          image: AssetImage(
+                              "assets/shop_details/services/medium_length_cut.png"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Row(
+                                children: [
+                                  Text(
+                                    'Medium Length Layer Cut',
+                                    style: TextStyle(
+                                      color: Color(0xFF111111),
+                                      fontSize: 14,
+                                      fontFamily: 'Manrope',
+                                      fontWeight: FontWeight.w700,
+                                      height: 0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'Rs 500',
+                                style: TextStyle(
+                                  color: Color(0xFFFFD600),
+                                  fontSize: 14,
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.w700,
+                                  height: 0,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.sizeOf(context).width - 210,
+                                    child: const Text(
+                                      "A blunt cut bob is a shorter hairstyle that's c..",
+                                      style: TextStyle(
+                                        color: Color(0xFF50555C),
+                                        fontSize: 12,
+                                        fontFamily: 'Nunito Sans',
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                        letterSpacing: 0.36,
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: ShapeDecoration(
+                                      color: const Color(0xFFFFD600),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width - 32,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      shadows: const [
+                        BoxShadow(
+                          color: Color(0x3FCDCDCD),
+                          blurRadius: 8,
+                          offset: Offset(0, 4),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        const Image(
+                          image: AssetImage(
+                              "assets/shop_details/services/v_shaped_cut.png"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Row(
+                                children: [
+                                  Text(
+                                    'V-Shaped Cut',
+                                    style: TextStyle(
+                                      color: Color(0xFF111111),
+                                      fontSize: 14,
+                                      fontFamily: 'Manrope',
+                                      fontWeight: FontWeight.w700,
+                                      height: 0,
+                                    ),
+                                  ),
+                                  SizedBox(width: 12),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 8,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.sell,
+                                          color: Color(0xFFF88600),
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          '-5%',
+                                          style: TextStyle(
+                                            color: Color(0xFFF88600),
+                                            fontSize: 12,
+                                            fontFamily: 'Manrope',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'Rs 700',
+                                style: TextStyle(
+                                  color: Color(0xFFFFD600),
+                                  fontSize: 14,
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.w700,
+                                  height: 0,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.sizeOf(context).width - 210,
+                                    child: const Text(
+                                      "A blunt cut bob is a shorter hairstyle that's c..",
+                                      style: TextStyle(
+                                        color: Color(0xFF50555C),
+                                        fontSize: 12,
+                                        fontFamily: 'Nunito Sans',
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                        letterSpacing: 0.36,
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: ShapeDecoration(
+                                      color: const Color(0xFFFFD600),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 16,
+                      right: 16,
+                      bottom: 16,
+                    ),
+                    child: Container(
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                              width: 1, color: Color(0xFFFFD600)),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5,
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 12,
                         ),
                         child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            _buildInterestContainer(
-                              imagePath: "assets/categories/haircut.png",
-                              text: "Haircut",
-                            ),
-                            const SizedBox(width: 5),
-                            _buildInterestContainer(
-                              imagePath: "assets/categories/nails.png",
-                              text: "Nails",
-                            ),
-                            const SizedBox(width: 5),
-                            _buildInterestContainer(
-                              imagePath: "assets/categories/facial.png",
-                              text: "Facial",
+                            Text(
+                              'View All Services',
+                              style: TextStyle(
+                                color: Color(0xFFFFD600),
+                                fontSize: 14,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    Stack(
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(0, 16, 16, 24),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Image.asset(
-                          "assets/shop_details/services/medium_length_cut.png",
-                          height: 114,
-                          width: 114,
-                        )
+                        Text(
+                          'Gallery',
+                          style: TextStyle(
+                            color: Color(0xFF111111),
+                            fontSize: 16,
+                            fontFamily: 'Manrope',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        ),
+                        SizedBox(width: 238),
+                        Text(
+                          'View all',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Color(0xFFFFD600),
+                            fontSize: 14,
+                            fontFamily: 'Manrope',
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                          ),
+                        ),
                       ],
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(children: [
+                      Image.asset('assets/shop_details/gallery/gallery1.png'),
+                      const SizedBox(width: 8),
+                      Image.asset('assets/shop_details/gallery/gallery2.png'),
+                      const SizedBox(width: 8),
+                      Image.asset('assets/shop_details/gallery/gallery3.png'),
+                      const SizedBox(width: 8),
+                      Image.asset('assets/shop_details/gallery/gallery1.png'),
+                      const SizedBox(width: 8),
+                      Image.asset('assets/shop_details/gallery/gallery2.png'),
+                      const SizedBox(width: 8),
+                      Image.asset('assets/shop_details/gallery/gallery3.png'),
+                      const SizedBox(width: 8),
+                      Image.asset('assets/shop_details/gallery/gallery1.png'),
+                      const SizedBox(width: 8),
+                      Image.asset('assets/shop_details/gallery/gallery2.png'),
+                      const SizedBox(width: 8),
+                      Image.asset('assets/shop_details/gallery/gallery3.png'),
+                      const SizedBox(width: 8),
+                    ]),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 16, 24),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Our Specialist',
+                          style: TextStyle(
+                            color: Color(0xFF111111),
+                            fontSize: 16,
+                            fontFamily: 'Manrope',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        ),
+                        SizedBox(width: 184),
+                        Text(
+                          'View all',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Color(0xFFFFD600),
+                            fontSize: 14,
+                            fontFamily: 'Manrope',
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Image.asset(
+                                'assets/shop_details/Specialist/rahul.png'),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'Rahul',
+                              style: TextStyle(
+                                color: Color(0xFF111111),
+                                fontSize: 14,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Column(
+                          children: [
+                            Image.asset(
+                                'assets/shop_details/Specialist/merry.png'),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'Meery',
+                              style: TextStyle(
+                                color: Color(0xFF111111),
+                                fontSize: 14,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Column(
+                          children: [
+                            Image.asset(
+                                'assets/shop_details/Specialist/bella.png'),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'Bella',
+                              style: TextStyle(
+                                color: Color(0xFF111111),
+                                fontSize: 14,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Column(
+                          children: [
+                            Image.asset(
+                                'assets/shop_details/Specialist/joseph.png'),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'Joseph',
+                              style: TextStyle(
+                                color: Color(0xFF111111),
+                                fontSize: 14,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Column(
+                          children: [
+                            Image.asset(
+                                'assets/shop_details/Specialist/samantha.png'),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'Samantha',
+                              style: TextStyle(
+                                color: Color(0xFF111111),
+                                fontSize: 14,
+                                fontFamily: 'Manrope',
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 16, 24),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Reviews',
+                          style: TextStyle(
+                            color: Color(0xFF111111),
+                            fontSize: 16,
+                            fontFamily: 'Manrope',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        ),
+                        SizedBox(width: 234),
+                        Text(
+                          'View all',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Color(0xFFFFD600),
+                            fontSize: 14,
+                            fontFamily: 'Manrope',
+                            fontWeight: FontWeight.w600,
+                            height: 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -392,8 +1124,8 @@ class _SalonDetailsState extends State<SalonDetails> {
           const SizedBox(width: 8),
           Text(
             text,
-            style: TextStyle(
-              color: const Color.fromRGBO(255, 214, 0, 1),
+            style: const TextStyle(
+              color: Color.fromRGBO(255, 214, 0, 1),
               fontSize: 14,
               fontFamily: 'Manrope',
               fontWeight: FontWeight.w600,
