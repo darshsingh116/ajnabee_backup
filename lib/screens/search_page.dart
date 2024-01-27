@@ -189,6 +189,106 @@ class SearchPage extends StatelessWidget{
                 ),
               ),
             ),
+            SizedBox(height: 10,),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Container(
+                height: 131,
+                width: 343,
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      "assets/salons/Image1.png",
+                      height: 131,
+                      width: 131,
+                    ),
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                        
+                      ),
+                    ),
+                    Positioned(
+                      top: 7,
+                      bottom: 0,
+                      left: 131 + 13,
+                      right: 6,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Hair, Facial',
+                          style: TextStyle(
+                            color: Color.fromRGBO(255, 214, 0, 1),
+                            fontFamily: 'Nunito Sans',
+                            fontSize: 12,
+                          ),
+                          ),
+                          SizedBox(height: 3,),
+                          Text('Looks Salon',
+                          style: TextStyle(
+                            color: Color.fromRGBO(17, 17, 17, 1),
+                            fontFamily: 'Manrope',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold
+                          ),
+                          ),
+                          SizedBox(height: 3,),
+                          Text('CP, Near Khadi India, Canno....',
+                          style: TextStyle(
+                            color: Color.fromRGBO(17, 17, 17, 1),
+                            fontFamily: 'Nunito Sans',
+                            fontSize: 14,
+                          
+                          ),
+                          ),
+                          SizedBox(height: 10,),
+                          Row(
+                            children: [
+                              Icon(Icons.star_rounded,
+                              color: Color.fromRGBO(249, 134, 0, 1),
+                              size: 16,
+                              ),
+                              SizedBox(width: 2,),
+                              Text('4.7',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Manrope',
+                              ),),
+                              Text('(2.7k)',
+                              style: TextStyle(
+                                fontSize: 12,
+                                
+                                fontFamily: 'Manrope',
+                              ),),
+                              SizedBox(width: 20,),
+
+                              Icon(Icons.discount,
+                              color: Color.fromRGBO(255, 214, 0, 1),
+                              size: 16,
+                              ),
+                              Text('-58%',
+                              style: TextStyle(
+                                fontSize: 12,
+                                
+                                fontFamily: 'Manrope',
+                              ),),
+                            ],
+                          )
+
+                      
+                        ],
+                      ),
+                    )
+                    
+                  ],
+                ),
+
+              ),
+              ),
         
         
         
@@ -484,7 +584,61 @@ class SearchPage extends StatelessWidget{
                         
                       ],),
                       
-                  )
+                  ),
+                  SizedBox(height: 1,),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        ServiceContainerWhite(text: 'Men'),
+                        SizedBox(width:1,),
+                        ServiceContainerWhite(text: 'Kids'),
+                        
+                        
+                        
+                      ],),
+                      
+                  ),
+                  SizedBox(height: 10,),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text('Distance',
+                      style: TextStyle(
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+              
+              
+                      ),),
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Container(
+                      height:54,
+                      width:343,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(255, 214, 0, 1),
+                        borderRadius: BorderRadius.circular(50),
+                        
+                      ),
+                      child: Center(
+                        child: Text('Show Result',
+                        style: TextStyle(
+                          fontFamily: 'Manrope',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromRGBO(255, 255, 255, 1),
+
+                        ),),
+                      ),
+
+                    ),
+                  ),
+
                 ],
               ),
             ),
