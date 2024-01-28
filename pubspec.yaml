@@ -84,6 +84,9 @@ flutter:
     - assets/salons/
     - assets/login/
     - assets/shop_details/services/
+    - assets/shop_details/gallery/
+    - assets/shop_details/Specialist/
+    - assets/shop_details/review/
     - assets/shop_details/shop.png
     - assets/after_booking/
 
