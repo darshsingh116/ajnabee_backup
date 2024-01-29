@@ -56,11 +56,17 @@ class chatPage extends StatelessWidget{
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            SizedBox(height: 10,),
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    // Messages go here
+                    children: [
+                      SizedBox(height: 10,),
             ChatMessageContainer(
               message: 'Hello, good morning :)', 
               isSentByMe: true
@@ -74,15 +80,71 @@ class chatPage extends StatelessWidget{
                 style: TextStyle(
                   color: Color.fromRGBO(173, 179, 188, 1),
                 ),),
-                
-              ],
-            ),
-            ChatMessageContainer(
+
+                    ],),
+                    ChatMessageContainer(
               message: 'Good morning, anything we can help at Plush Beauty Longue Salon?', 
               isSentByMe: false
             ),
-          ],
-        ),
+                    ]
+                    
+                  ),
+                ),
+              ),
+              Divider(height: 1, color: Colors.grey), // Divider for message section
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: EdgeInsets.all(8),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      // Attach files action
+                    },
+                    icon: Icon(Icons.attach_file),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(240, 243, 246, 1),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Type your message...',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      // Emoji picker action
+                    },
+                    icon: Icon(Icons.emoji_emotions,
+                    color: Color.fromRGBO(173, 179, 188, 1),),
+                  ),
+                  SizedBox(width: 8),
+                  CircleAvatar(
+                    backgroundColor: Color.fromRGBO(255, 214, 0, 1),
+                    child: IconButton(
+                      onPressed: () {
+                        // Send button action
+                      },
+                      icon: Icon(Icons.send, color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
 
