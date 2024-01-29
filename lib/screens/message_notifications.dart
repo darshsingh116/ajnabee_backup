@@ -33,9 +33,32 @@ class _MessageNotificationsState extends State<MessageNotifications> {
                     child: Column(
                       children: [
                         buildmessagecontainer(
-                            'Plush Beauty Lounge', 'Good morning, anything we ca', '11:32 PM', 2, 'assets/stories/Story 2.png'),
+                          sender: 'Plush Beauty Lounge',
+                          message: 'Good morning, anything we ca',
+                          time: '11:32 PM',
+                          unreadCount: 2,
+                          profileImage: 'assets/stories/Story 2.png',
+                        ),
                         buildmessagecontainer(
-                            'Lovely Lather', 'Good morning, anything we ca', '11:40 PM', 5, 'assets/stories/Story 4.png')
+                          sender: 'Lovely Lather',
+                          message: 'Good morning, anything we ca',
+                          time: '11:40 PM',
+                          unreadCount: 5,
+                          profileImage: 'assets/stories/Story 4.png',
+                        ),
+                        buildmessagecontainer(
+                          sender: 'Cute Stuff Salon',
+                          message: 'I would like to book an appoin...',
+                          time: 'Yesterday',
+                          unreadCount: 2,
+                          profileImage: 'assets/stories/Story 1.png',
+                        ),
+                        buildmessagecontainer(
+                          sender: 'Love Live Salon',
+                          message: 'I would like to book an appoin...',
+                          time: 'Yesterday',
+                          profileImage: 'assets/stories/Story 1.png',
+                        ),
                       ],
                     ),
                   ),
@@ -88,72 +111,79 @@ class _MessageNotificationsState extends State<MessageNotifications> {
     );
   }
 
-Widget buildmessagecontainer(String sender, String message, String time, int unreadCount, String profileImage) {
-  return Column(
-    children: [
-      Container(
-        padding: EdgeInsets.all(16),
-        margin: EdgeInsets.all(8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CircleAvatar(
-              radius: 24,
-              backgroundImage: AssetImage(profileImage),
-            ),
-            SizedBox(width: 10,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  sender,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Manrope',
-                    color: Colors.black,
-                    fontSize: 16,
+  Widget buildmessagecontainer({
+    required String sender,
+    required String message,
+    required String time,
+    int unreadCount = 0,
+    required String profileImage,
+  }) {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(16),
+          margin: EdgeInsets.all(8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CircleAvatar(
+                radius: 24,
+                backgroundImage: AssetImage(profileImage),
+              ),
+              SizedBox(width: 10,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    sender,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Manrope',
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                SizedBox(height: 1,),
-                Text(
-                  message,
-                  style: TextStyle(
-                    color: Color.fromRGBO(80, 85, 92, 1),
-                    fontFamily: 'Nunito Sans',
-                    fontSize: 14,
+                  SizedBox(height: 1,),
+                  Text(
+                    message,
+                    style: TextStyle(
+                      color: Color.fromRGBO(80, 85, 92, 1),
+                      fontFamily: 'Nunito Sans',
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(width: 3,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    time,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                      fontFamily: 'Nunito Sans',
+                    ),
                   ),
-                )
-              ],
-            ),
-            SizedBox(width: 3,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  time,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                    fontFamily: 'Nunito Sans',
-                  ),
-                ),
-                SizedBox(height: 1,),
-                _buildUnreadCountBadge(unreadCount),
-              ],
-            )
-          ],
+                  if (unreadCount > 0)
+                    SizedBox(height: 1,),
+                  if (unreadCount > 0)
+                    _buildUnreadCountBadge(unreadCount),
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-      Divider(
-        color: Color.fromRGBO(209, 213, 219, 1),
-        thickness: 0.3,
-        height: 0,
-        
-      ),
-    ],
-  );
-}
-
+        if (unreadCount > 0)
+          Divider(
+            color: Color.fromRGBO(209, 213, 219, 1),
+            thickness: 0.3,
+            height: 0,
+          ),
+      ],
+    );
+  }
 
   Widget _buildUnreadCountBadge(int count) {
     return Container(
