@@ -1,20 +1,26 @@
 class SalonServicesModel {
   final String serviceName;
+  final String description;
+  final String image;
   final double price;
-  final String type;
+  final int discount;
 
   SalonServicesModel({
     required this.serviceName,
+    required this.description,
+    required this.image,
     required this.price,
-    required this.type,
+    required this.discount,
   });
 
   // Receiving data from server
   factory SalonServicesModel.fromMap(Map<String, dynamic> map) {
     return SalonServicesModel(
       serviceName: map['serviceName'] as String,
+      description: map['description'] as String,
+      image: map['image'] as String,
       price: (map['price'] as num).toDouble(),
-      type: map['description'] as String,
+      discount: (map['discount'] as num).toInt(),
     );
   }
 
@@ -29,8 +35,10 @@ class SalonServicesModel {
   Map<String, dynamic> toJson() {
     return {
       'serviceName': serviceName,
+      'description': description,
+      'image': image,
       'price': price,
-      'description': type,
+      'discount': discount,
     };
   }
 }

@@ -112,7 +112,13 @@ class FirebaseRepository {
             4,
             [
               SalonServicesModel(
-                  serviceName: "Curly Hair", price: 99, type: "haircut")
+                serviceName: "Curly Hair",
+                price: 99,
+                description: "haircut",
+                image:
+                    'https://images.pexels.com/photos/705255/pexels-photo-705255.jpeg?auto=compress&cs=tinysrgb&w=600',
+                discount: 10,
+              )
             ],
             0)
       ];
@@ -163,26 +169,9 @@ class FirebaseRepository {
       //return 0;
     }
   }
-
-    //get SalonList model
-  Future<List<SalonServicesModel>> getSalonServices() async {
-    try {
-      var response = await _firebaseFirestore.collection("SalonServicesList").get();
-      var list =
-          response.docs.map((doc) => SalonServicesModel.fromMap(doc.data())).toList();
-      print(list[0].serviceName);
-      return list;
-
-      //return 1;
-    } catch (e) {
-      return [];
-      //return 0;
-    }
-  }
 }
 
  
 
 /////////////////////////////////////
-
 
