@@ -163,6 +163,22 @@ class FirebaseRepository {
       //return 0;
     }
   }
+
+    //get SalonList model
+  Future<List<SalonServicesModel>> getSalonServices() async {
+    try {
+      var response = await _firebaseFirestore.collection("SalonServicesList").get();
+      var list =
+          response.docs.map((doc) => SalonServicesModel.fromMap(doc.data())).toList();
+      print(list[0].serviceName);
+      return list;
+
+      //return 1;
+    } catch (e) {
+      return [];
+      //return 0;
+    }
+  }
 }
 
  
