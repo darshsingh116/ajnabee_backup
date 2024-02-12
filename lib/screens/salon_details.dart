@@ -1,5 +1,8 @@
 import 'package:ajnabee/models/salon_model.dart';
+import 'package:ajnabee/models/salon_services_model.dart';
+import 'package:ajnabee/screens/salon_services_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SalonDetails extends StatefulWidget {
   final SalonModel salonModel;
@@ -15,10 +18,13 @@ class _SalonDetailsState extends State<SalonDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final List<SalonServicesModel> salonServices =
+        widget.salonModel.servicesList;
     return Scaffold(
-      // appBar: AppBar(
-      //   toolbarHeight: 0,
-      // ),
+      appBar: AppBar(
+        toolbarHeight: 0,
+        // systemOverlayStyle: SystemUiOverlayStyle(),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -362,463 +368,20 @@ class _SalonDetailsState extends State<SalonDetails> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 14,
-                  ),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width - 32,
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      shadows: const [
-                        BoxShadow(
-                          color: Color(0x3FCDCDCD),
-                          blurRadius: 8,
-                          offset: Offset(0, 4),
-                          spreadRadius: 0,
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        const Image(
-                          image: AssetImage(
-                              "assets/shop_details/services/woman_mediium.png"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Row(
-                                children: [
-                                  Text(
-                                    'Woman Medium..',
-                                    style: TextStyle(
-                                      color: Color(0xFF111111),
-                                      fontSize: 14,
-                                      fontFamily: 'Manrope',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  SizedBox(width: 12),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 4,
-                                      horizontal: 8,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.sell,
-                                          color: Color(0xFFF88600),
-                                        ),
-                                        SizedBox(width: 4),
-                                        Text(
-                                          '-20%',
-                                          style: TextStyle(
-                                            color: Color(0xFFF88600),
-                                            fontSize: 12,
-                                            fontFamily: 'Manrope',
-                                            fontWeight: FontWeight.w700,
-                                            height: 0,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Rs 200',
-                                style: TextStyle(
-                                  color: Color(0xFFFFD600),
-                                  fontSize: 14,
-                                  fontFamily: 'Manrope',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.sizeOf(context).width - 210,
-                                    child: const Text(
-                                      "A blunt cut bob is a shorter hairstyle that's c..",
-                                      style: TextStyle(
-                                        color: Color(0xFF50555C),
-                                        fontSize: 12,
-                                        fontFamily: 'Nunito Sans',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                        letterSpacing: 0.36,
-                                      ),
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 32,
-                                    height: 32,
-                                    decoration: ShapeDecoration(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            width: 1, color: Color(0xFFED4C5C)),
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                    ),
-                                    child: const Icon(
-                                      Icons.remove,
-                                      color: Color(0xFFED4C5C),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width - 32,
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      shadows: const [
-                        BoxShadow(
-                          color: Color(0x3FCDCDCD),
-                          blurRadius: 8,
-                          offset: Offset(0, 4),
-                          spreadRadius: 0,
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        const Image(
-                          image: AssetImage(
-                              "assets/shop_details/services/bob_cut.png"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Row(
-                                children: [
-                                  Text(
-                                    'Bob/ Lob Cut',
-                                    style: TextStyle(
-                                      color: Color(0xFF111111),
-                                      fontSize: 14,
-                                      fontFamily: 'Manrope',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  SizedBox(width: 12),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 4,
-                                      horizontal: 8,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.sell,
-                                          color: Color(0xFFF88600),
-                                        ),
-                                        SizedBox(width: 4),
-                                        Text(
-                                          '-20%',
-                                          style: TextStyle(
-                                            color: Color(0xFFF88600),
-                                            fontSize: 12,
-                                            fontFamily: 'Manrope',
-                                            fontWeight: FontWeight.w700,
-                                            height: 0,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Rs 250',
-                                style: TextStyle(
-                                  color: Color(0xFFFFD600),
-                                  fontSize: 14,
-                                  fontFamily: 'Manrope',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.sizeOf(context).width - 210,
-                                    child: const Text(
-                                      "A blunt cut bob is a shorter hairstyle that's c..",
-                                      style: TextStyle(
-                                        color: Color(0xFF50555C),
-                                        fontSize: 12,
-                                        fontFamily: 'Nunito Sans',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                        letterSpacing: 0.36,
-                                      ),
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 32,
-                                    height: 32,
-                                    decoration: ShapeDecoration(
-                                      color: const Color(0xFFFFD600),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                    ),
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width - 32,
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      shadows: const [
-                        BoxShadow(
-                          color: Color(0x3FCDCDCD),
-                          blurRadius: 8,
-                          offset: Offset(0, 4),
-                          spreadRadius: 0,
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        const Image(
-                          image: AssetImage(
-                              "assets/shop_details/services/medium_length_cut.png"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Row(
-                                children: [
-                                  Text(
-                                    'Medium Length Layer Cut',
-                                    style: TextStyle(
-                                      color: Color(0xFF111111),
-                                      fontSize: 14,
-                                      fontFamily: 'Manrope',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Rs 500',
-                                style: TextStyle(
-                                  color: Color(0xFFFFD600),
-                                  fontSize: 14,
-                                  fontFamily: 'Manrope',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.sizeOf(context).width - 210,
-                                    child: const Text(
-                                      "A blunt cut bob is a shorter hairstyle that's c..",
-                                      style: TextStyle(
-                                        color: Color(0xFF50555C),
-                                        fontSize: 12,
-                                        fontFamily: 'Nunito Sans',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                        letterSpacing: 0.36,
-                                      ),
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 32,
-                                    height: 32,
-                                    decoration: ShapeDecoration(
-                                      color: const Color(0xFFFFD600),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                    ),
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width - 32,
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      shadows: const [
-                        BoxShadow(
-                          color: Color(0x3FCDCDCD),
-                          blurRadius: 8,
-                          offset: Offset(0, 4),
-                          spreadRadius: 0,
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        const Image(
-                          image: AssetImage(
-                              "assets/shop_details/services/v_shaped_cut.png"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Row(
-                                children: [
-                                  Text(
-                                    'V-Shaped Cut',
-                                    style: TextStyle(
-                                      color: Color(0xFF111111),
-                                      fontSize: 14,
-                                      fontFamily: 'Manrope',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  SizedBox(width: 12),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 4,
-                                      horizontal: 8,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.sell,
-                                          color: Color(0xFFF88600),
-                                        ),
-                                        SizedBox(width: 4),
-                                        Text(
-                                          '-5%',
-                                          style: TextStyle(
-                                            color: Color(0xFFF88600),
-                                            fontSize: 12,
-                                            fontFamily: 'Manrope',
-                                            fontWeight: FontWeight.w700,
-                                            height: 0,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Rs 700',
-                                style: TextStyle(
-                                  color: Color(0xFFFFD600),
-                                  fontSize: 14,
-                                  fontFamily: 'Manrope',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.sizeOf(context).width - 210,
-                                    child: const Text(
-                                      "A blunt cut bob is a shorter hairstyle that's c..",
-                                      style: TextStyle(
-                                        color: Color(0xFF50555C),
-                                        fontSize: 12,
-                                        fontFamily: 'Nunito Sans',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                        letterSpacing: 0.36,
-                                      ),
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 32,
-                                    height: 32,
-                                    decoration: ShapeDecoration(
-                                      color: const Color(0xFFFFD600),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                    ),
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  // const SizedBox(height: 7),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: salonServices.length,
+                    itemBuilder: (context, index) {
+                      return SalonServicesCard(
+                        serviceName: salonServices[index].serviceName,
+                        description: salonServices[index].description,
+                        image: salonServices[index].image,
+                        price: salonServices[index].price,
+                        discount: salonServices[index].discount,
+                      );
+                    },
                   ),
                   const SizedBox(height: 8),
                   Padding(
@@ -1092,7 +655,6 @@ class _SalonDetailsState extends State<SalonDetails> {
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),
@@ -1102,8 +664,10 @@ class _SalonDetailsState extends State<SalonDetails> {
     );
   }
 
-  Widget _buildInterestContainer(
-      {required String imagePath, required String text}) {
+  Widget _buildInterestContainer({
+    required String imagePath,
+    required String text,
+  }) {
     return Container(
       margin: const EdgeInsets.all(8),
       width: 146,
