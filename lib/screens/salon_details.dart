@@ -15,13 +15,13 @@ class SalonDetails extends StatefulWidget {
 
 class _SalonDetailsState extends State<SalonDetails> {
   bool isExpanded = false;
+  bool isFavourite = false;
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.sizeOf(context).width;
     final List<SalonServicesModel> salonServices =
         widget.salonModel.servicesList;
-    bool isFavourite = false;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -75,7 +75,7 @@ class _SalonDetailsState extends State<SalonDetails> {
                     child: IconButton(
                       onPressed: () {
                         setState(() {
-                          isFavourite = true;
+                          isFavourite = !isFavourite;
                         });
                       },
                       icon: const Icon(
@@ -695,108 +695,107 @@ class _SalonDetailsState extends State<SalonDetails> {
           ],
         ),
       ),
-      persistentFooterButtons: [
-        Container(
-          padding: const EdgeInsets.only(
-            left: 16,
-            right: 16,
-            top: 4,
-            bottom: 4,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const Column(
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        'Total ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: 'Manrope',
-                          fontWeight: FontWeight.w700,
-                          height: 0,
-                        ),
-                      ),
-                      Text(
-                        '(1 Service)',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: 'Nunito Sans',
-                          fontWeight: FontWeight.w400,
-                          height: 0,
-                          letterSpacing: 0.24,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Rs 200',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 22,
-                          fontFamily: 'Manrope',
-                          fontWeight: FontWeight.w700,
-                          height: 0,
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        'Rs 250',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: 'Nunito Sans',
-                          fontWeight: FontWeight.w400,
-                          height: 0,
-                          decoration: TextDecoration.lineThrough,
-                          letterSpacing: 0.27,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(width: 16),
-              IconButton(
-                constraints: const BoxConstraints(minWidth: 52, minHeight: 52),
-                style: const ButtonStyle(
-                    side: MaterialStatePropertyAll(
-                  BorderSide(width: 1, color: Color(0xFFFFD600)),
-                )),
-                onPressed: () {},
-                icon: SvgPicture.asset("assets/misc/Chat.svg", height: 24),
-              ),
-              const SizedBox(width: 16),
-              IconButton(
-                constraints: const BoxConstraints(minWidth: 132, minHeight: 52),
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(
-                    Color(0xFFFFD600),
-                  ),
-                ),
-                onPressed: () {},
-                icon: const Text(
-                  'Book Now',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: 'Manrope',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                  ),
-                ),
-              ),
-            ],
-          ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 8,
+          bottom: 8,
         ),
-      ],
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Total ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
+                      ),
+                    ),
+                    Text(
+                      '(1 Service)',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Nunito Sans',
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                        letterSpacing: 0.24,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Rs 200',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      'Rs 250',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: 'Nunito Sans',
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                        decoration: TextDecoration.lineThrough,
+                        letterSpacing: 0.27,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(width: 16),
+            IconButton(
+              constraints: const BoxConstraints(minWidth: 52, minHeight: 52),
+              style: const ButtonStyle(
+                  side: MaterialStatePropertyAll(
+                BorderSide(width: 1, color: Color(0xFFFFD600)),
+              )),
+              onPressed: () {},
+              icon: SvgPicture.asset("assets/misc/Chat.svg", height: 24),
+            ),
+            const SizedBox(width: 16),
+            IconButton(
+              constraints: const BoxConstraints(minWidth: 132, minHeight: 52),
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(
+                  Color(0xFFFFD600),
+                ),
+              ),
+              onPressed: () {},
+              icon: const Text(
+                'Book Now',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w600,
+                  height: 0,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
