@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:ajnabee/models/salon_model.dart';
 import 'package:ajnabee/models/salon_services_model.dart';
 import 'package:ajnabee/screens/salon_services_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SalonDetails extends StatefulWidget {
   final SalonModel salonModel;
@@ -623,7 +627,7 @@ class _SalonDetailsState extends State<SalonDetails> {
                     height: 32,
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 16, 24),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 16, 8),
                     child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -654,6 +658,22 @@ class _SalonDetailsState extends State<SalonDetails> {
                       ],
                     ),
                   ),
+                  _buildReviewCard(
+                    image: "imagePath",
+                    name: "Jennie Whang",
+                    time: DateTime(2024, 1, 12),
+                    review:
+                        "The place was clean, great serivce, stall are friendly. I will certainly recommend to my friends and visit again! ;)",
+                    rating: 5,
+                  ),
+                  _buildReviewCard(
+                    image: "imagePath",
+                    name: "Nathalie",
+                    time: DateTime(2024, 2, 10),
+                    review:
+                        "Very nice service from the specialist. I always going here for my treatment.",
+                    rating: 4,
+                  )
                 ],
               ),
             ),
@@ -663,40 +683,174 @@ class _SalonDetailsState extends State<SalonDetails> {
     );
   }
 
-  Widget _buildInterestContainer({
-    required String imagePath,
-    required String text,
+  Widget _buildReviewCard({
+    required String image,
+    required String name,
+    required DateTime time,
+    required String review,
+    required int rating,
   }) {
+    double width = MediaQuery.sizeOf(context).width;
+
+    String getTimeDifferenceFromNow(DateTime dateTime) {
+      Duration difference = DateTime.now().difference(dateTime);
+      // Duration difference = Duration(days: 730);
+
+      if (difference.inSeconds < 5) {
+        return "Just now";
+      } else if (difference.inMinutes < 1) {
+        return "${difference.inSeconds} seconds ago";
+      } else if (difference.inMinutes == 1) {
+        return "1 minute ago";
+      } else if (difference.inHours < 1) {
+        return "${difference.inMinutes} minutes ago";
+      } else if (difference.inHours == 1) {
+        return "1 hour ago";
+      } else if (difference.inHours < 24) {
+        return "${difference.inHours} hours ago";
+      } else if (difference.inDays == 1) {
+        return "1 day ago";
+      } else if (difference.inDays < 7) {
+        return "${difference.inDays} days ago";
+      } else if (difference.inDays < 14) {
+        return "1 week ago";
+      } else if (difference.inDays < 28) {
+        return "${difference.inDays ~/ 7} weeks ago";
+      } else if (difference.inDays < 61) {
+        return "1 month ago";
+      } else if (difference.inDays < 365) {
+        return "${difference.inDays ~/ 30.41} months ago";
+      } else if (difference.inDays ~/ 365 == 1) {
+        return "1 year ago";
+      } else {
+        return "${difference.inDays ~/ 365.25} years ago";
+      }
+    }
+    // log(getTimeDifferenceFromNow(time));
+
     return Container(
-      margin: const EdgeInsets.all(8),
-      width: 146,
-      height: 56,
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(225, 255, 255, 1),
-        borderRadius: BorderRadius.circular(50),
-      ),
+      constraints: const BoxConstraints(maxWidth: double.infinity),
+      padding: const EdgeInsets.only(right: 16, top: 16, bottom: 16),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center, // Center align content
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            imagePath,
-            width: 32,
-            height: 32,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            text,
-            style: const TextStyle(
-              color: Color.fromRGBO(255, 214, 0, 1),
-              fontSize: 14,
-              fontFamily: 'Manrope',
-              fontWeight: FontWeight.w600,
-              height: 0,
+          // ignore: prefer_const_constructors
+          CircleAvatar(
+              backgroundImage:
+                  //temp
+                  const AssetImage(
+                      "assets/shop_details/Specialist/samantha.png")),
+          // NetworkImage(image)),
+
+          const SizedBox(width: 16),
+          SizedBox(
+            width: width - 88,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      constraints:
+                          BoxConstraints(maxWidth: (width - 88) * 65 / 100),
+                      child: Text(
+                        name,
+                        maxLines: 1,
+                        softWrap: true,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontFamily: 'Nunito Sans',
+                          fontWeight: FontWeight.w400,
+                          height: 0,
+                          letterSpacing: 0.27,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      constraints:
+                          BoxConstraints(maxWidth: (width - 88) * 30 / 100),
+                      child: Text(
+                        getTimeDifferenceFromNow(time),
+                        style: const TextStyle(
+                          color: Color(0xFF5D636E),
+                          fontSize: 11,
+                          fontFamily: 'Nunito Sans',
+                          fontWeight: FontWeight.w400,
+                          height: 0,
+                          letterSpacing: 0.36,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: List.generate(
+                    rating,
+                    (index) => SvgPicture.asset("assets/misc/Star.svg"),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  review,
+                  softWrap: true,
+                  // maxLines: 5,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontFamily: 'Nunito Sans',
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                    letterSpacing: 0.24,
+                  ),
+                ),
+              ],
             ),
-          ),
+          )
         ],
       ),
     );
   }
+}
+
+Widget _buildInterestContainer({
+  required String imagePath,
+  required String text,
+}) {
+  return Container(
+    margin: const EdgeInsets.all(8),
+    width: 146,
+    height: 56,
+    decoration: BoxDecoration(
+      color: const Color.fromRGBO(225, 255, 255, 1),
+      borderRadius: BorderRadius.circular(50),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center, // Center align content
+      children: [
+        Image.asset(
+          imagePath,
+          width: 32,
+          height: 32,
+          fit: BoxFit.cover,
+        ),
+        const SizedBox(width: 8),
+        Text(
+          text,
+          style: const TextStyle(
+            color: Color.fromRGBO(255, 214, 0, 1),
+            fontSize: 14,
+            fontFamily: 'Manrope',
+            fontWeight: FontWeight.w600,
+            height: 0,
+          ),
+        ),
+      ],
+    ),
+  );
 }

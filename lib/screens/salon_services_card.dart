@@ -43,7 +43,7 @@ class _SalonServicesCardState extends State<SalonServicesCard> {
           children: [
             ClipRRect(
               clipBehavior: Clip.hardEdge,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(8),
                 topLeft: Radius.circular(8),
               ),
@@ -84,7 +84,7 @@ class _SalonServicesCardState extends State<SalonServicesCard> {
                       Builder(
                         builder: (context) {
                           if (widget.discount == 0) {
-                            return SizedBox(width: 0);
+                            return const SizedBox(width: 0);
                           } else {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
