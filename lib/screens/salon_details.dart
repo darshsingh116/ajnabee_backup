@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:ajnabee/models/salon_model.dart';
 import 'package:ajnabee/models/salon_services_model.dart';
 import 'package:ajnabee/screens/salon_services_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SalonDetails extends StatefulWidget {
@@ -21,8 +18,10 @@ class _SalonDetailsState extends State<SalonDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.sizeOf(context).width;
     final List<SalonServicesModel> salonServices =
         widget.salonModel.servicesList;
+    bool isFavourite = false;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -36,7 +35,7 @@ class _SalonDetailsState extends State<SalonDetails> {
                 Image(
                   image: const AssetImage('assets/shop_details/shop.png'),
                   fit: BoxFit.fitWidth,
-                  width: MediaQuery.sizeOf(context).width,
+                  width: width,
                 ),
                 Positioned(
                   left: 16,
@@ -50,8 +49,11 @@ class _SalonDetailsState extends State<SalonDetails> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
-                    child: GestureDetector(
-                      child: const Icon(
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Color.fromRGBO(255, 214, 0, 1),
                       ),
@@ -70,10 +72,21 @@ class _SalonDetailsState extends State<SalonDetails> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
-                    child: GestureDetector(
-                      child: const Icon(
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isFavourite = true;
+                        });
+                      },
+                      icon: const Icon(
                         Icons.favorite_border_outlined,
                         color: Colors.red,
+                      ),
+                      isSelected: isFavourite,
+                      selectedIcon: const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                        // fill: 1,
                       ),
                     ),
                   ),
@@ -90,8 +103,9 @@ class _SalonDetailsState extends State<SalonDetails> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
-                    child: GestureDetector(
-                      child: const Icon(
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
                         Icons.map,
                         color: Color.fromRGBO(255, 214, 0, 1),
                       ),
@@ -393,15 +407,14 @@ class _SalonDetailsState extends State<SalonDetails> {
                       right: 16,
                       bottom: 16,
                     ),
-                    child: Container(
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                              width: 1, color: Color(0xFFFFD600)),
-                          borderRadius: BorderRadius.circular(50),
+                    child: IconButton(
+                      onPressed: () {},
+                      style: const ButtonStyle(
+                        side: MaterialStatePropertyAll(
+                          BorderSide(width: 1, color: Color(0xFFFFD600)),
                         ),
                       ),
-                      child: const Padding(
+                      icon: const Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 32,
                           vertical: 12,
@@ -665,6 +678,7 @@ class _SalonDetailsState extends State<SalonDetails> {
                     review:
                         "The place was clean, great serivce, stall are friendly. I will certainly recommend to my friends and visit again! ;)",
                     rating: 5,
+                    width: width,
                   ),
                   _buildReviewCard(
                     image: "imagePath",
@@ -673,13 +687,116 @@ class _SalonDetailsState extends State<SalonDetails> {
                     review:
                         "Very nice service from the specialist. I always going here for my treatment.",
                     rating: 4,
-                  )
+                    width: width,
+                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
+      persistentFooterButtons: [
+        Container(
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 4,
+            bottom: 4,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Total ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Manrope',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
+                        ),
+                      ),
+                      Text(
+                        '(1 Service)',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Nunito Sans',
+                          fontWeight: FontWeight.w400,
+                          height: 0,
+                          letterSpacing: 0.24,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Rs 200',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 22,
+                          fontFamily: 'Manrope',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'Rs 250',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Nunito Sans',
+                          fontWeight: FontWeight.w400,
+                          height: 0,
+                          decoration: TextDecoration.lineThrough,
+                          letterSpacing: 0.27,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(width: 16),
+              IconButton(
+                constraints: const BoxConstraints(minWidth: 52, minHeight: 52),
+                style: const ButtonStyle(
+                    side: MaterialStatePropertyAll(
+                  BorderSide(width: 1, color: Color(0xFFFFD600)),
+                )),
+                onPressed: () {},
+                icon: SvgPicture.asset("assets/misc/Chat.svg", height: 24),
+              ),
+              const SizedBox(width: 16),
+              IconButton(
+                constraints: const BoxConstraints(minWidth: 132, minHeight: 52),
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                    Color(0xFFFFD600),
+                  ),
+                ),
+                onPressed: () {},
+                icon: const Text(
+                  'Book Now',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'Manrope',
+                    fontWeight: FontWeight.w600,
+                    height: 0,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -689,9 +806,8 @@ class _SalonDetailsState extends State<SalonDetails> {
     required DateTime time,
     required String review,
     required int rating,
+    required double width,
   }) {
-    double width = MediaQuery.sizeOf(context).width;
-
     String getTimeDifferenceFromNow(DateTime dateTime) {
       Duration difference = DateTime.now().difference(dateTime);
       // Duration difference = Duration(days: 730);
@@ -816,41 +932,41 @@ class _SalonDetailsState extends State<SalonDetails> {
       ),
     );
   }
-}
 
-Widget _buildInterestContainer({
-  required String imagePath,
-  required String text,
-}) {
-  return Container(
-    margin: const EdgeInsets.all(8),
-    width: 146,
-    height: 56,
-    decoration: BoxDecoration(
-      color: const Color.fromRGBO(225, 255, 255, 1),
-      borderRadius: BorderRadius.circular(50),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Center align content
-      children: [
-        Image.asset(
-          imagePath,
-          width: 32,
-          height: 32,
-          fit: BoxFit.cover,
-        ),
-        const SizedBox(width: 8),
-        Text(
-          text,
-          style: const TextStyle(
-            color: Color.fromRGBO(255, 214, 0, 1),
-            fontSize: 14,
-            fontFamily: 'Manrope',
-            fontWeight: FontWeight.w600,
-            height: 0,
+  Widget _buildInterestContainer({
+    required String imagePath,
+    required String text,
+  }) {
+    return Container(
+      margin: const EdgeInsets.all(8),
+      width: 146,
+      height: 56,
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(225, 255, 255, 1),
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center, // Center align content
+        children: [
+          Image.asset(
+            imagePath,
+            width: 32,
+            height: 32,
+            fit: BoxFit.cover,
           ),
-        ),
-      ],
-    ),
-  );
+          const SizedBox(width: 8),
+          Text(
+            text,
+            style: const TextStyle(
+              color: Color.fromRGBO(255, 214, 0, 1),
+              fontSize: 14,
+              fontFamily: 'Manrope',
+              fontWeight: FontWeight.w600,
+              height: 0,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
