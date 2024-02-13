@@ -9,7 +9,7 @@
 
 //   SalonServicesBloc() : super(SalonServicesInitial()) {
 //     on<SalonServicesInitialize>((event, emit) async {
-//       // salonServicesList = await event.firebaseRepository.getSalonServices();
+//       salonServicesList = await event.firebaseRepository.getSalonServices();
 //       emit(SalonServicesInitialized(
 //         salonServicesList: salonServicesList,
 //       ));

@@ -1,6 +1,7 @@
 import 'package:ajnabee/bloc/home/bloc/home_bloc.dart';
 import 'package:ajnabee/models/salon_model.dart';
 import 'package:ajnabee/repositories/firebase_repo.dart';
+import 'package:ajnabee/screens/my_profile.dart';
 import 'package:ajnabee/screens/salon_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -325,13 +326,22 @@ class RootPage extends StatelessWidget {
                                         padding: EdgeInsets.only(
                                             right:
                                                 16.0), // Adjust spacing between cards
-                                        child: GestureDetector(child: FeaturedSalonCard(context,state.salonModelList[index]),
-                                        onTap: () {
-                                          Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SalonDetails(salonModel: state.salonModelList[index],)),
-        );
-                                        },),
+                                        child: GestureDetector(
+                                          child: FeaturedSalonCard(context,
+                                              state.salonModelList[index]),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SalonDetails(
+                                                        salonModel: state
+                                                                .salonModelList[
+                                                            index],
+                                                      )),
+                                            );
+                                          },
+                                        ),
                                       );
                                     },
                                   );
@@ -528,6 +538,12 @@ class RootPage extends StatelessWidget {
           onTap: (int index) {
             if (index == 1) {
               _showNearbyBottomSheet(context);
+            }
+            if (index == 4) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyProfile()),
+              );
             }
           },
         ));
