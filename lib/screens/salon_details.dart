@@ -2,7 +2,6 @@ import 'package:ajnabee/models/salon_model.dart';
 import 'package:ajnabee/models/salon_services_model.dart';
 import 'package:ajnabee/screens/salon_services_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class SalonDetails extends StatefulWidget {
   final SalonModel salonModel;
