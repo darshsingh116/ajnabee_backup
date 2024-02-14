@@ -199,8 +199,57 @@ class PaymentDetails extends StatelessWidget {
                   ),
                   
                   
-                  
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20,top:10),
+                    child: Row(
+                      children:[
+                        Container(
+                          height: 8,
+                          child: Switch(
+                            value: true, 
+                            onChanged: (value) {
+                              
+                            },
+                            inactiveTrackColor: Colors.white ,
+                            activeTrackColor: const Color.fromRGBO(255, 214, 0, 1),
+                            activeColor: Colors.white,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Securely Save Card and Details',
+                          style: TextStyle(
+                            fontFamily: 'Nunito Sans',
+                            
+                            fontSize: 14,
+                          ),
+                        ),
+                      ]
+                    ),
+                  ),
+                  SizedBox(height: 2,),
+                  Container(
+                    height: 54,
+                    width: 220,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(255, 214, 0, 1),
+                      borderRadius: BorderRadius.circular(50),
+                      
+                    ),
+                    child: Row(
+                            children: [
+                              SizedBox(width:55),
+                              Text('Add New Card',
+                                style: TextStyle(
+                                  
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                            ),),
+                            Icon(Icons.arrow_forward),]),
+                  )
                 ],
+                
               ),
             ),
           ),
