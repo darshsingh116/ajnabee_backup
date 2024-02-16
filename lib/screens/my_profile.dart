@@ -1,4 +1,4 @@
-// import 'package:ajnabee/screens/bottom_navigation_bar.dart';
+import 'package:ajnabee/screens/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -202,7 +202,7 @@ class MyProfile extends StatelessWidget {
           ],
         ),
       ),
-      // bottomNavigationBar: CustomNavBar(),
+      bottomNavigationBar: const CustomNavBar(),
     );
   }
 }
