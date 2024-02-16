@@ -320,12 +320,12 @@ class RootPage extends StatelessWidget {
                                 if (state is HomeStateInitialized) {
                                   return ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 1,
+                                    itemCount: state.salonModelList.length,
                                     itemBuilder: (context, index) {
                                       return Padding(
-                                        padding: EdgeInsets.only(
-                                            right:
-                                                16.0), // Adjust spacing between cards
+                                        padding: const EdgeInsets.only(
+                                          right: 16.0,
+                                        ), // Adjust spacing between cards
                                         child: GestureDetector(
                                           child: FeaturedSalonCard(context,
                                               state.salonModelList[index]),
@@ -333,12 +333,12 @@ class RootPage extends StatelessWidget {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SalonDetails(
-                                                        salonModel: state
-                                                                .salonModelList[
-                                                            index],
-                                                      )),
+                                                builder: (context) =>
+                                                    SalonDetails(
+                                                  salonModel: state
+                                                      .salonModelList[index],
+                                                ),
+                                              ),
                                             );
                                           },
                                         ),
@@ -347,8 +347,8 @@ class RootPage extends StatelessWidget {
                                   );
                                 }
 
-                                return Center(
-                                  child: Container(
+                                return const Center(
+                                  child: SizedBox(
                                     height: 100,
                                     width: 100,
                                     child: CircularProgressIndicator(
@@ -542,7 +542,7 @@ class RootPage extends StatelessWidget {
             if (index == 4) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyProfile()),
+                MaterialPageRoute(builder: (context) => const MyProfile()),
               );
             }
           },
@@ -571,8 +571,8 @@ class RootPage extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             text,
-            style: TextStyle(
-              color: const Color.fromRGBO(255, 214, 0, 1),
+            style: const TextStyle(
+              color: Color.fromRGBO(255, 214, 0, 1),
               fontSize: 14,
               fontFamily: 'Manrope',
               fontWeight: FontWeight.w600,
@@ -598,8 +598,8 @@ class RootPage extends StatelessWidget {
         children: [
           Text(
             text,
-            style: TextStyle(
-              color: const Color.fromRGBO(255, 255, 255, 1),
+            style: const TextStyle(
+              color: Color.fromRGBO(255, 255, 255, 1),
               fontSize: 12,
               fontFamily: 'Manrope',
               fontWeight: FontWeight.w600,
@@ -628,8 +628,8 @@ class RootPage extends StatelessWidget {
         children: [
           Text(
             text,
-            style: TextStyle(
-              color: const Color.fromRGBO(255, 240, 40, 1),
+            style: const TextStyle(
+              color: Color.fromRGBO(255, 240, 40, 1),
               fontSize: 12,
               fontFamily: 'Manrope',
               fontWeight: FontWeight.w600,
@@ -647,13 +647,13 @@ class RootPage extends StatelessWidget {
       builder: (BuildContext context) {
         return Container(
           // Your bottom sheet content goes here
-          padding: EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 20),
 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
+              const Padding(
+                padding: EdgeInsets.only(left: 16.0),
                 child: Text(
                   "Nearby Salon List",
                   style: TextStyle(
@@ -702,7 +702,7 @@ class RootPage extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 1,
                           blurRadius: 3,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -717,39 +717,39 @@ class RootPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15, top: 2),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 15, top: 2),
                               child: Text(
                                 "Hair,Facial",
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontFamily: "Nunito Sans",
                                   fontWeight: FontWeight.w400,
-                                  color: const Color.fromRGBO(255, 240, 40, 1),
+                                  color: Color.fromRGBO(255, 240, 40, 1),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15, top: 2),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 15, top: 2),
                               child: Text(
                                 "Looks Salon",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontFamily: "Manrope",
                                   fontWeight: FontWeight.w700,
-                                  color: const Color.fromRGBO(0, 0, 0, 1),
+                                  color: Color.fromRGBO(0, 0, 0, 1),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15, top: 2),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 15, top: 2),
                               child: Text(
                                 "CP,Near Khadi India,Cann.",
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: "Nunito Sans",
                                   fontWeight: FontWeight.w400,
-                                  color: const Color.fromRGBO(0, 0, 0, 1),
+                                  color: Color.fromRGBO(0, 0, 0, 1),
                                 ),
                               ),
                             ),
@@ -766,22 +766,22 @@ class RootPage extends StatelessWidget {
                                     height: 12.67,
                                     width: 13.64,
                                   ),
-                                  Text(
+                                  const Text(
                                     "4.7",
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: "Manrope",
                                       fontWeight: FontWeight.w700,
-                                      color: const Color.fromRGBO(0, 0, 0, 1),
+                                      color: Color.fromRGBO(0, 0, 0, 1),
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     "(2.7k)",
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: "Manrope",
                                       fontWeight: FontWeight.w400,
-                                      color: const Color.fromRGBO(0, 0, 0, 1),
+                                      color: Color.fromRGBO(0, 0, 0, 1),
                                     ),
                                   ),
                                 ],
@@ -827,7 +827,7 @@ class RootPage extends StatelessWidget {
       children: <Widget>[
         Image.asset("assets/salons/Image1.png"),
         const SizedBox(height: 16),
-        Text(
+        const Text(
           "salon.services",
           style: TextStyle(
             color: Color(0xFFFFD600),
@@ -841,7 +841,7 @@ class RootPage extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           salon.name,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xFF111111),
             fontSize: 16,
             fontFamily: 'Manrope',
@@ -852,7 +852,7 @@ class RootPage extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           salon.address,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xFF50555C),
             fontSize: 14,
             fontFamily: 'Nunito Sans',
@@ -874,7 +874,7 @@ class RootPage extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               salon.rating.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFF111111),
                 fontSize: 12,
                 fontFamily: 'Manrope',
@@ -883,7 +883,7 @@ class RootPage extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
-            Text(
+            const Text(
               '(4k)',
               style: TextStyle(
                 color: Color(0xFF111111),
