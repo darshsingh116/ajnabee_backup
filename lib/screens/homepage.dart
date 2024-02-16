@@ -14,10 +14,12 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseRepository = context.read<FirebaseRepository>();
+    ThemeData.light();
 
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 0,
+          backgroundColor: Colors.white,
         ),
         body: BlocConsumer<HomeBloc, HomeState>(
           listener: (context, state) {

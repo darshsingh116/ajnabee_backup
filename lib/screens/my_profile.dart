@@ -1,3 +1,4 @@
+// import 'package:ajnabee/screens/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -7,17 +8,17 @@ class MyProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
-    final topPadding = MediaQuery.paddingOf(context).top;
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: const Color(0xFFFFD600),
+      ),
       backgroundColor: const Color(0xFFFFD600),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: topPadding,
-            ),
             Padding(
               padding: const EdgeInsets.only(
                 left: 20,
@@ -201,6 +202,7 @@ class MyProfile extends StatelessWidget {
           ],
         ),
       ),
+      // bottomNavigationBar: CustomNavBar(),
     );
   }
 }
