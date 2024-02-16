@@ -202,7 +202,7 @@ class MyProfile extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomNavBar(),
+      bottomNavigationBar: CustomNavBar(),
     );
   }
 }

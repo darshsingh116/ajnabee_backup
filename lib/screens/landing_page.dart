@@ -22,9 +22,7 @@ class RootPage extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         body: BlocConsumer<HomeBloc, HomeState>(
-          listener: (context, state) {
-            // TODO: implement listener
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             if (state is HomeInitial) {
               context.read<HomeBloc>().add(
@@ -539,7 +537,7 @@ class RootPage extends StatelessWidget {
           ],
           onTap: (int index) {
             if (index == 1) {
-              _showNearbyBottomSheet(context);
+              showNearbyBottomSheet(context);
             }
             if (index == 4) {
               Navigator.push(
@@ -643,7 +641,7 @@ class RootPage extends StatelessWidget {
     );
   }
 
-  void _showNearbyBottomSheet(BuildContext context) {
+  void showNearbyBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {

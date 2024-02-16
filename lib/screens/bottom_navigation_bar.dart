@@ -1,8 +1,12 @@
+import 'package:ajnabee/screens/Landing_page.dart';
+import 'package:ajnabee/screens/my_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomNavBar extends StatefulWidget {
-  const CustomNavBar({super.key});
+  const CustomNavBar._sharedInstace();
+  static const _shared = CustomNavBar._sharedInstace();
+  factory CustomNavBar() => _shared;
 
   @override
   State<CustomNavBar> createState() => _CustomNavBarState();
@@ -70,6 +74,25 @@ class _CustomNavBarState extends State<CustomNavBar> {
             setState(() {
               isSelected = index;
               isNotification.remove(index);
+              switch (isSelected) {
+                case 0:
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const RootPage();
+                  }));
+                  break;
+                case 1:
+                  break;
+                case 2:
+                  break;
+                case 3:
+                  break;
+                case 4:
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const MyProfile();
+                  }));
+                  break;
+                default:
+              }
             });
           },
         ),

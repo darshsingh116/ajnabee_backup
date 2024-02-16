@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ajnabee/screens/homepage.dart';
+import 'package:ajnabee/screens/landing_page.dart';
 
 class BookingDone extends StatelessWidget {
   const BookingDone({Key? key});
