@@ -1,4 +1,7 @@
 import 'package:ajnabee/bloc/navigation_bloc/navigation_bloc.dart';
+import 'package:ajnabee/screens/discovery_page.dart';
+import 'package:ajnabee/screens/landing_page.dart';
+import 'package:ajnabee/screens/my_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -72,10 +75,16 @@ class CustomNavBar extends StatelessWidget {
               case 0:
                 event = NavigateToHome();
                 BlocProvider.of<NavigationBloc>(context).add(event);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RootPage(),
+                    ));
                 break;
               case 1:
                 event = NavigateToDiscovery();
                 BlocProvider.of<NavigationBloc>(context).add(event);
+                showNearbyBottomSheet(context);
                 break;
               case 2:
                 event = NavigateToCalendar();
@@ -88,6 +97,11 @@ class CustomNavBar extends StatelessWidget {
               case 4:
                 event = NavigateToProfile();
                 BlocProvider.of<NavigationBloc>(context).add(event);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MyProfile(),
+                    ));
                 break;
             }
           },

@@ -4,15 +4,9 @@ import 'package:ajnabee/bloc/navigation_bloc/navigation_bloc.dart';
 import 'package:ajnabee/firebase_options.dart';
 import 'package:ajnabee/repositories/firebase_repo.dart';
 import 'package:ajnabee/repositories/firebase_storage_repo.dart';
-import 'package:ajnabee/screens/after_booking/booking_done.dart';
-import 'package:ajnabee/screens/after_booking/pagenotfound.dart';
-import 'package:ajnabee/screens/boarding_screen.dart';
-import 'package:ajnabee/screens/salon_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ajnabee/screens/after_booking/error.dart';
-
 import 'screens/landing_page.dart';
 
 void main() async {
