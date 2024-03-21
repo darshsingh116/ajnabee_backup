@@ -1,8 +1,11 @@
 import 'package:ajnabee/models/salon_model.dart';
 import 'package:ajnabee/models/salon_services_model.dart';
+import 'package:ajnabee/repositories/firebase_repo.dart';
+import 'package:ajnabee/screens/chat.dart';
 import 'package:ajnabee/screens/salon_services_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SalonDetails extends StatefulWidget {
   final SalonModel salonModel;
@@ -19,6 +22,9 @@ class _SalonDetailsState extends State<SalonDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseRepository = context.read<FirebaseRepository>();
+    firebaseRepository.userModel;
+
     final double width = MediaQuery.sizeOf(context).width;
     final List<SalonServicesModel> salonServices =
         widget.salonModel.servicesList;
@@ -770,7 +776,12 @@ class _SalonDetailsState extends State<SalonDetails> {
                   side: MaterialStatePropertyAll(
                 BorderSide(width: 1, color: Color(0xFFFFD600)),
               )),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => chatPage()),
+                );
+              },
               icon: SvgPicture.asset("assets/misc/Chat.svg", height: 24),
             ),
             const SizedBox(width: 16),

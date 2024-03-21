@@ -1,15 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ajnabee/bloc/home/bloc/home_bloc.dart';
 import 'package:ajnabee/models/salon_model.dart';
 import 'package:ajnabee/repositories/firebase_repo.dart';
 import 'package:ajnabee/screens/salon_details.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../components/category_button.dart';
 
-class RootPage extends StatelessWidget {
+class RootPage extends StatefulWidget {
   const RootPage({super.key});
 
+  @override
+  State<RootPage> createState() => _RootPageState();
+}
+
+class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     final firebaseRepository = context.read<FirebaseRepository>();
@@ -40,13 +47,13 @@ class RootPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        const Column(
+                        Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              'Hello, Shanaya',
+                              'Hello, ${firebaseRepository.userModel.name}',
                               style: TextStyle(
                                 color: Color(0xFF111111),
                                 fontSize: 24,
@@ -76,10 +83,24 @@ class RootPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(50),
                             ),
                           ),
-                          child: IconButton(
-                            color: Colors.white,
-                            icon: const Icon(Icons.search),
-                            onPressed: () {},
+                          child: BlocBuilder<HomeBloc, HomeState>(
+                            builder: (context, state) {
+                              if (state is HomeStateInitialized) {
+                                return IconButton(
+                                  color: Colors.white,
+                                  icon: const Icon(Icons.search),
+                                  onPressed: () {
+                                    showSearch(
+                                      context: context,
+                                      delegate: MySearchDelegate(
+                                          results: state.salonModelList),
+                                    );
+                                  },
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -319,19 +340,28 @@ class RootPage extends StatelessWidget {
                                 if (state is HomeStateInitialized) {
                                   return ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 1,
+                                    itemCount: state.salonModelList.length,
                                     itemBuilder: (context, index) {
                                       return Padding(
                                         padding: EdgeInsets.only(
                                             right:
                                                 16.0), // Adjust spacing between cards
-                                        child: GestureDetector(child: FeaturedSalonCard(context,state.salonModelList[index]),
-                                        onTap: () {
-                                          Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SalonDetails(salonModel: state.salonModelList[index],)),
-        );
-                                        },),
+                                        child: GestureDetector(
+                                          child: FeaturedSalonCard(context,
+                                              state.salonModelList[index]),
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SalonDetails(
+                                                        salonModel: state
+                                                                .salonModelList[
+                                                            index],
+                                                      )),
+                                            );
+                                          },
+                                        ),
                                       );
                                     },
                                   );
@@ -881,6 +911,68 @@ class RootPage extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class MySearchDelegate extends SearchDelegate {
+  List<SalonModel> results;
+  MySearchDelegate({
+    required this.results,
+  });
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            if (query.isEmpty) {
+              close(context, null);
+            } else {
+              query = '';
+            }
+          },
+          icon: Icon(Icons.clear))
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () => close(context, null), icon: Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<SalonModel> suggestions = results.where((salon) {
+      final salonName = salon.name.toLowerCase();
+      final servicesMatch = salon.servicesList.any((service) {
+        final serviceName = service.serviceName.toLowerCase();
+        final serviceDescription = service.description.toLowerCase();
+        final input = query.toLowerCase();
+        return serviceName.contains(input) ||
+            serviceDescription.contains(input);
+      });
+      return salonName.contains(query.toLowerCase()) || servicesMatch;
+    }).toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final suggestion = suggestions[index];
+        return ListTile(
+          title: Text(suggestion.name),
+          onTap: () {
+            // Handle the onTap action for the suggestion
+          },
+        );
+      },
     );
   }
 }

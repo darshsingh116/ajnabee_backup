@@ -1,16 +1,95 @@
+import 'dart:convert';
+import 'package:ajnabee/models/chat_model.dart';
+import 'package:ajnabee/repositories/firebase_repo.dart';
 import 'package:flutter/material.dart';
-class chatPage extends StatelessWidget{
-  const chatPage({Key?key});
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+class chatPage extends StatefulWidget {
+  const chatPage({Key? key});
+
   @override
-  Widget build(BuildContext context){
+  State<chatPage> createState() => _chatPageState();
+}
+
+class _chatPageState extends State<chatPage> {
+  late IO.Socket socket;
+  List<ChatModel> chatMessages = [];
+  TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    connectToServer();
+  }
+
+  void connectToServer() {
+    print("conn to server ran");
+
+    socket = IO.io('http://192.168.1.40:3000/', <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': true,
+      'reconnect': true,
+      'reconnectionAttempts': 5,
+      'reconnectionDelay': 1000,
+      'forceNew': true,
+    });
+
+    socket.on('connect', (_) {
+      print('Connected to server');
+    });
+
+    socket.on('message', (data) {
+      ChatModel chatModel = ChatModel.fromJson(jsonDecode(data));
+      setState(() {
+        chatMessages.add(chatModel);
+      });
+    });
+
+    socket.on('disconnect', (_) {
+      print('Disconnected from server');
+    });
+  }
+
+  void _sendMessage() {
+    final message = _textEditingController.text.trim();
+    if (message.isNotEmpty) {
+      // Create a chatModel object with the message
+      final chatModel = {
+        'id': 0,
+        'message': message,
+      };
+      // Convert the chatModel object to a JSON string
+      final jsonMessage = json.encode(chatModel);
+      // Emit a message event with the JSON message
+      socket.emit('message', jsonMessage);
+      _textEditingController.clear();
+    }
+  }
+
+  @override
+  void dispose() {
+    // Disconnect the socket when the widget is disposed
+    if (socket != null) {
+      socket.disconnect();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-
-        }, icon: Icon(Icons.arrow_back_ios,
-        color: Color.fromRGBO(255, 214, 0, 1),
-        ),
-        
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Color.fromRGBO(255, 214, 0, 1),
+          ),
         ),
         title: Row(
           children: [
@@ -19,40 +98,48 @@ class chatPage extends StatelessWidget{
               height: 32,
               width: 32,
             ),
-            SizedBox(width: 5,),
+            SizedBox(
+              width: 5,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Plush Beauty Lounge',
+                Text(
+                  'Plush Beauty Lounge',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Manrope',
                   ),
                 ),
-                Text('Online',
+                Text(
+                  'Online',
                   style: TextStyle(
                     fontSize: 12,
                     color: Color.fromRGBO(255, 214, 0, 1),
                     fontFamily: 'Nunito Sans',
                   ),
                 ),
-
               ],
-
             ),
-            SizedBox(width: 10,),
-            IconButton(onPressed: (){
-
-            }, icon: Icon(Icons.call_rounded,
-            color: Color.fromRGBO(255, 214, 0, 1),)),
-            SizedBox(width: 1,),
-            IconButton(onPressed: (){
-
-            }, icon: Icon(Icons.menu_rounded,
-            color: Color.fromRGBO(255, 214, 0, 1),)),
-            
-            
+            SizedBox(
+              width: 10,
+            ),
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.call_rounded,
+                  color: Color.fromRGBO(255, 214, 0, 1),
+                )),
+            SizedBox(
+              width: 1,
+            ),
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.menu_rounded,
+                  color: Color.fromRGBO(255, 214, 0, 1),
+                )),
           ],
         ),
       ),
@@ -61,37 +148,55 @@ class chatPage extends StatelessWidget{
           Column(
             children: [
               Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    // Messages go here
-                    children: [
-                      SizedBox(height: 10,),
-            ChatMessageContainer(
-              message: 'Hello, good morning :)', 
-              isSentByMe: true
-            ),
-            SizedBox(height: 5,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(width: 5,),
-                Text('11:20',
-                style: TextStyle(
-                  color: Color.fromRGBO(173, 179, 188, 1),
-                ),),
-
-                    ],),
-                    ChatMessageContainer(
-              message: 'Good morning, anything we can help at Plush Beauty Longue Salon?', 
-              isSentByMe: false
-            ),
-                    ]
-                    
-                  ),
+                child: ListView.builder(
+                  itemCount: chatMessages.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      child: ChatMessageContainer(
+                          message: chatMessages[index].message,
+                          isSentByMe:
+                              (chatMessages[index].id == 0) ? true : false),
+                    );
+                  },
                 ),
               ),
-              Divider(height: 1, color: Colors.grey), // Divider for message section
+              // Expanded(
+              //   child: SingleChildScrollView(
+              //     scrollDirection: Axis.vertical,
+              //     child: Column(
+              //         // Messages go here
+              //         children: [
+              //           SizedBox(
+              //             height: 10,
+              //           ),
+              //           ChatMessageContainer(
+              //               message: 'Hello, good morning :)',
+              //               isSentByMe: true),
+              //           SizedBox(
+              //             height: 5,
+              //           ),
+              //           Row(
+              //             mainAxisAlignment: MainAxisAlignment.end,
+              //             children: [
+              //               SizedBox(
+              //                 width: 5,
+              //               ),
+              //               Text(
+              //                 '11:20',
+              //                 style: TextStyle(
+              //                   color: Color.fromRGBO(173, 179, 188, 1),
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //           ChatMessageContainer(
+              //               message: 'Good morning', isSentByMe: false),
+              //         ]),
+              //   ),
+              // ),
+              Divider(
+                  height: 1, color: Colors.grey), // Divider for message section
             ],
           ),
           Positioned(
@@ -116,6 +221,7 @@ class chatPage extends StatelessWidget{
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: TextField(
+                        controller: _textEditingController,
                         decoration: InputDecoration(
                           hintText: 'Type your message...',
                           border: InputBorder.none,
@@ -124,19 +230,17 @@ class chatPage extends StatelessWidget{
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      // Emoji picker action
-                    },
-                    icon: Icon(Icons.emoji_emotions,
-                    color: Color.fromRGBO(173, 179, 188, 1),),
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.emoji_emotions,
+                      color: Color.fromRGBO(173, 179, 188, 1),
+                    ),
                   ),
                   SizedBox(width: 8),
                   CircleAvatar(
                     backgroundColor: Color.fromRGBO(255, 214, 0, 1),
                     child: IconButton(
-                      onPressed: () {
-                        // Send button action
-                      },
+                      onPressed: _sendMessage,
                       icon: Icon(Icons.send, color: Colors.white),
                     ),
                   ),
@@ -147,10 +251,9 @@ class chatPage extends StatelessWidget{
         ],
       ),
     );
-
   }
-  
 }
+
 class ChatMessageContainer extends StatelessWidget {
   final String message;
   final bool isSentByMe;
@@ -188,7 +291,7 @@ class ChatMessageContainer extends StatelessWidget {
             decoration: BoxDecoration(
               color: isSentByMe
                   ? Color.fromRGBO(225, 245, 250, 1)
-                  : Color.fromRGBO(255 , 214, 0, 1),
+                  : Color.fromRGBO(255, 214, 0, 1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
@@ -206,4 +309,3 @@ class ChatMessageContainer extends StatelessWidget {
     );
   }
 }
-

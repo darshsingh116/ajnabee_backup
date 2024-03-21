@@ -6,6 +6,7 @@ import 'package:ajnabee/repositories/firebase_storage_repo.dart';
 import 'package:ajnabee/screens/after_booking/booking_done.dart';
 import 'package:ajnabee/screens/after_booking/pagenotfound.dart';
 import 'package:ajnabee/screens/boarding_screen.dart';
+import 'package:ajnabee/screens/login_screen.dart';
 import 'package:ajnabee/screens/salon_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       //home: const RootPage(),
-      home: RootPage()
+      home: LoginScreen()
     )));
   }
 }

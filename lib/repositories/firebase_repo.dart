@@ -13,12 +13,14 @@ class FirebaseRepository {
 
   Future<int> alreadyLoggedIn() async {
     User? user = await _firebaseAuth.currentUser;
+    
 
     if (user == null) {
       return 1;
     } else {
       var response =
           await _firebaseFirestore.collection("Users").doc(user.uid).get();
+          userModel = UserModel.fromMap(response.data()!);
       print(response.data());
 
       return 0;
@@ -29,7 +31,7 @@ class FirebaseRepository {
     try {
       var userCredential = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      print("loggedin1");
+      
 
       user = userCredential.user!;
 
