@@ -1,7 +1,7 @@
 import 'package:ajnabee/screens/signup_screen.dart';
-import 'package:ajnabee/screens/homepage.dart';
+import 'package:ajnabee/screens/landing_page.dart';
 import 'package:flutter/material.dart';
-import 'homepage.dart';
+import 'landing_page.dart';
 import 'login_screen.dart';
 
 class BoardingScreen extends StatefulWidget {

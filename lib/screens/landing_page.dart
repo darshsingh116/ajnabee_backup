@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ajnabee/bloc/home/bloc/home_bloc.dart';
 import 'package:ajnabee/models/salon_model.dart';
 import 'package:ajnabee/repositories/firebase_repo.dart';
+import 'package:ajnabee/screens/bottom_navigation_bar.dart';
 import 'package:ajnabee/screens/salon_details.dart';
 
 import '../components/category_button.dart';
@@ -20,15 +21,15 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     final firebaseRepository = context.read<FirebaseRepository>();
+    ThemeData.light();
 
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 0,
+          backgroundColor: Colors.white,
         ),
         body: BlocConsumer<HomeBloc, HomeState>(
-          listener: (context, state) {
-            // TODO: implement listener
-          },
+          listener: (context, state) {},
           builder: (context, state) {
             if (state is HomeInitial) {
               context.read<HomeBloc>().add(
@@ -228,66 +229,7 @@ class _RootPageState extends State<RootPage> {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 16),
-
-                  // //SALON YOU FOLLOW
-                  // SizedBox(
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.symmetric(
-                  //       vertical: 8,
-                  //     ),
-                  //     child: Column(
-                  //       mainAxisAlignment: MainAxisAlignment.start,
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: <Widget>[
-                  //         const Padding(
-                  //           padding: EdgeInsets.symmetric(
-                  //             horizontal: 16,
-                  //           ),
-                  //           child: Text(
-                  //             'Salon you follow',
-                  //             style: TextStyle(
-                  //               color: Color(0xFF111111),
-                  //               fontSize: 16,
-                  //               fontFamily: 'Manrope',
-                  //               fontWeight: FontWeight.w700,
-                  //               height: 0,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         const SizedBox(height: 24),
-                  //         SingleChildScrollView(
-                  //           scrollDirection: Axis.horizontal,
-                  //           child: Padding(
-                  //             padding: const EdgeInsets.symmetric(
-                  //               horizontal: 16,
-                  //             ),
-                  //             child: Row(
-                  //               children: List.generate(
-                  //                 5,
-                  //                 (index) {
-                  //                   return Row(
-                  //                     children: <Widget>[
-                  //                       Image.asset(
-                  //                         "assets/stories/Story ${index + 1}.png",
-                  //                         fit: BoxFit.fill,
-                  //                       ),
-                  //                       const SizedBox(width: 8),
-                  //                     ],
-                  //                   );
-                  //                 },
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-
-                  // const SizedBox(height: 16),
-
                   //FEATURED SALON
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -343,22 +285,39 @@ class _RootPageState extends State<RootPage> {
                                     itemCount: state.salonModelList.length,
                                     itemBuilder: (context, index) {
                                       return Padding(
+<<<<<<< HEAD:lib/screens/homepage.dart
                                         padding: EdgeInsets.only(
                                             right:
                                                 16.0), // Adjust spacing between cards
                                         child: GestureDetector(
                                           child: FeaturedSalonCard(context,
+=======
+                                        padding: const EdgeInsets.only(
+                                          right: 16.0,
+                                        ), // Adjust spacing between cards
+                                        child: GestureDetector(
+                                          child: featuredSalonCard(context,
+>>>>>>> 2d6c908210df52a4141f5c4b5eaa9e1e6176ad79:lib/screens/landing_page.dart
                                               state.salonModelList[index]),
                                           onTap: () {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
+<<<<<<< HEAD:lib/screens/homepage.dart
                                                   builder: (context) =>
                                                       SalonDetails(
                                                         salonModel: state
                                                                 .salonModelList[
                                                             index],
                                                       )),
+=======
+                                                builder: (context) =>
+                                                    SalonDetails(
+                                                  salonModel: state
+                                                      .salonModelList[index],
+                                                ),
+                                              ),
+>>>>>>> 2d6c908210df52a4141f5c4b5eaa9e1e6176ad79:lib/screens/landing_page.dart
                                             );
                                           },
                                         ),
@@ -367,8 +326,8 @@ class _RootPageState extends State<RootPage> {
                                   );
                                 }
 
-                                return Center(
-                                  child: Container(
+                                return const Center(
+                                  child: SizedBox(
                                     height: 100,
                                     width: 100,
                                     child: CircularProgressIndicator(
@@ -515,52 +474,7 @@ class _RootPageState extends State<RootPage> {
             );
           },
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          fixedColor: Colors.black,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.amber,
-              ),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.explore,
-                color: Colors.amber,
-              ),
-              label: "Nearby",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.calendar_month,
-                color: Colors.amber,
-              ),
-              label: "Appointment",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.inbox,
-                color: Colors.amber,
-              ),
-              label: "Inbox",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                color: Colors.amber,
-              ),
-              label: "Profile",
-            ),
-          ],
-          onTap: (int index) {
-            if (index == 1) {
-              _showNearbyBottomSheet(context);
-            }
-          },
-        ));
+        bottomNavigationBar: const CustomNavBar());
   }
 
   Widget _buildInterestContainer(
@@ -585,8 +499,8 @@ class _RootPageState extends State<RootPage> {
           const SizedBox(width: 8),
           Text(
             text,
-            style: TextStyle(
-              color: const Color.fromRGBO(255, 214, 0, 1),
+            style: const TextStyle(
+              color: Color.fromRGBO(255, 214, 0, 1),
               fontSize: 14,
               fontFamily: 'Manrope',
               fontWeight: FontWeight.w600,
@@ -598,250 +512,13 @@ class _RootPageState extends State<RootPage> {
     );
   }
 
-  Widget _buildnearbyyellowContainer({required String text}) {
-    return Container(
-      margin: const EdgeInsets.all(8),
-      width: 88,
-      height: 32,
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(255, 214, 0, 1),
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center, // Center align content
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-              color: const Color.fromRGBO(255, 255, 255, 1),
-              fontSize: 12,
-              fontFamily: 'Manrope',
-              fontWeight: FontWeight.w600,
-              height: 0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildnearbywhiteContainer({required String text}) {
-    return Container(
-      margin: const EdgeInsets.all(8),
-      width: 88,
-      height: 32,
-      decoration: BoxDecoration(
-          color: const Color.fromRGBO(255, 255, 255, 1),
-          borderRadius: BorderRadius.circular(100),
-          border: Border.all(
-            color: const Color.fromRGBO(255, 220, 40, 1),
-            width: 2,
-          )),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center, // Center align content
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-              color: const Color.fromRGBO(255, 240, 40, 1),
-              fontSize: 12,
-              fontFamily: 'Manrope',
-              fontWeight: FontWeight.w600,
-              height: 0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showNearbyBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          // Your bottom sheet content goes here
-          padding: EdgeInsets.only(top: 20),
-
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Text(
-                  "Nearby Salon List",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Manrope',
-                  ),
-                ),
-              ),
-
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  child: Row(children: [
-                    _buildnearbyyellowContainer(
-                      text: "Haircut",
-                    ),
-                    const SizedBox(width: 2),
-                    _buildnearbywhiteContainer(
-                      text: "Nails",
-                    ),
-                    const SizedBox(width: 2),
-                    _buildnearbyyellowContainer(
-                      text: "Facial",
-                    ),
-                  ]),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Container(
-                    height: 131,
-                    width: 343,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          "assets/salons/Image1.png",
-                          height: 131,
-                          width: 125,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15, top: 2),
-                              child: Text(
-                                "Hair,Facial",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: "Nunito Sans",
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color.fromRGBO(255, 240, 40, 1),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15, top: 2),
-                              child: Text(
-                                "Looks Salon",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: "Manrope",
-                                  fontWeight: FontWeight.w700,
-                                  color: const Color.fromRGBO(0, 0, 0, 1),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 15, top: 2),
-                              child: Text(
-                                "CP,Near Khadi India,Cann.",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Nunito Sans",
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color.fromRGBO(0, 0, 0, 1),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 25),
-                            const SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image.asset(
-                                    "assets/misc/Star.png",
-                                    height: 12.67,
-                                    width: 13.64,
-                                  ),
-                                  Text(
-                                    "4.7",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: "Manrope",
-                                      fontWeight: FontWeight.w700,
-                                      color: const Color.fromRGBO(0, 0, 0, 1),
-                                    ),
-                                  ),
-                                  Text(
-                                    "(2.7k)",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: "Manrope",
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color.fromRGBO(0, 0, 0, 1),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        Image.asset(
-                          "assets/misc/Heart.png",
-                          height: 24,
-                          width: 24,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-              // ListTile(
-              //   title: Text('Option 1'),
-              //   onTap: () {
-              //     // Perform action for Option 1
-              //     Navigator.pop(context);
-              //   },
-              // ),
-              // ListTile(
-              //   title: Text('Option 2'),
-              //   onTap: () {
-              //     // Perform action for Option 2
-              //     Navigator.pop(context);
-              //   },
-              // ),
-              // Add more list tiles or widgets as needed
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget FeaturedSalonCard(BuildContext context, SalonModel salon) {
+  Widget featuredSalonCard(BuildContext context, SalonModel salon) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Image.asset("assets/salons/Image1.png"),
         const SizedBox(height: 16),
-        Text(
+        const Text(
           "salon.services",
           style: TextStyle(
             color: Color(0xFFFFD600),
@@ -855,7 +532,7 @@ class _RootPageState extends State<RootPage> {
         const SizedBox(height: 4),
         Text(
           salon.name,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xFF111111),
             fontSize: 16,
             fontFamily: 'Manrope',
@@ -866,7 +543,7 @@ class _RootPageState extends State<RootPage> {
         const SizedBox(height: 6),
         Text(
           salon.address,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xFF50555C),
             fontSize: 14,
             fontFamily: 'Nunito Sans',
@@ -888,7 +565,7 @@ class _RootPageState extends State<RootPage> {
             const SizedBox(width: 8),
             Text(
               salon.rating.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFF111111),
                 fontSize: 12,
                 fontFamily: 'Manrope',
@@ -897,7 +574,7 @@ class _RootPageState extends State<RootPage> {
               ),
             ),
             const SizedBox(width: 4),
-            Text(
+            const Text(
               '(4k)',
               style: TextStyle(
                 color: Color(0xFF111111),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../homepage.dart';
+import '../landing_page.dart';
 class PageNotFound extends StatefulWidget {
   const PageNotFound({super.key});
 

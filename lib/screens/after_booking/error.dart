@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../homepage.dart';
+import '../landing_page.dart';
 class Error extends StatefulWidget {
   const Error({super.key});
 

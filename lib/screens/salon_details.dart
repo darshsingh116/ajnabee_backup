@@ -249,7 +249,9 @@ class _SalonDetailsState extends State<SalonDetails> {
                           child: Text(
                             isExpanded
                                 ? widget.salonModel.description
-                                : '${widget.salonModel.description.substring(0, 30)}... Read more',
+                                : (widget.salonModel.description.length < 30
+                                    ? widget.salonModel.description
+                                    : ('${widget.salonModel.description.substring(0, 30)}... Read more')),
                             softWrap: true,
                             style: const TextStyle(
                               fontSize: 14,
